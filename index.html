@@ -72,6 +72,7 @@
 
     /* ── MAIN ── */
     main { padding: 1.5rem 2.5rem 3rem; }
+    .table-container { max-width: 70%; margin: 0 auto; }
 
     /* ── BADGES ── */
     .badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 500; }
@@ -174,6 +175,7 @@
       .legend { display: none; }
       main { padding: 1rem 1rem 2.5rem; }
       .table-wrap { display: none; }
+      .table-container { max-width: 100%; }
       .mobile-list { display: flex; }
       .cards-grid { grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 10px; }
     }
@@ -375,7 +377,7 @@
       return;
     }
 
-    let t = `<div class="table-wrap"><table><thead><tr>`;
+    let t = `<div class="table-container"><div class="table-wrap"><table><thead><tr>`;
     t += `<th style="width:56px;cursor:default;"></th>`; // colonna immagine
     visCols.forEach(i => {
       const cls   = sortCol===i?'sorted':'';
@@ -410,7 +412,7 @@
       });
       t += '</tr>';
     });
-    t += '</tbody></table></div>';
+    t += '</tbody></table></div></div>';
 
     /* ── Render mobile list ── */
     let m = `<div class="mobile-list">`;
