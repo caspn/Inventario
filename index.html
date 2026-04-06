@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario Letteratura</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F7F5F0;
+      --surface: #FFFFFF;
+      --surface2: #F0EDE7;
+      --border: rgba(0,0,0,0.1);
+      --border-strong: rgba(0,0,0,0.18);
+      --text: #1A1814;
+      --text-muted: #6B6560;
+      --text-faint: #A09A93;
+      --accent: #2C4A3E;
+      --accent-light: #E8EFE8;
+      --amber: #8C5E1A;
+      --amber-light: #FAF0DC;
+      --red: #8C2A2A;
+      --red-light: #FAECEC;
+      --radius: 10px;
+      --radius-lg: 16px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 2.5rem 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      color: var(--text);
+    }
+    .brand p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    .reload-header {
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 6px 16px;
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .reload-header:hover { background: var(--surface2); color: var(--text); }
+    .spin { display: inline-block; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── STATS ── */
+    .stats-bar {
+      display: flex;
+      gap: 1px;
+      background: var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-item {
+      flex: 1;
+      background: var(--surface);
+      padding: 1rem 1.5rem;
+      min-width: 0;
+    }
+    .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); font-weight: 500; }
+    .stat-value { font-size: 26px; font-weight: 300; color: var(--text); margin-top: 2px; font-family: 'Playfair Display', serif; }
+
+    /* ── TOOLBAR ── */
+    .toolbar {
+      padding: 1rem 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .search-wrap {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+    }
+    .search-wrap svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .search-wrap input {
+      width: 100%;
+      height: 38px;
+      padding: 0 12px 0 38px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .search-wrap input:focus { border-color: var(--accent); }
+    .search-wrap input::placeholder { color: var(--text-faint); }
+
+    select {
+      height: 38px;
+      padding: 0 32px 0 12px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      min-width: 140px;
+    }
+    select:focus { border-color: var(--accent); }
+
+    .view-toggle {
+      display: flex;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .view-toggle button {
+      border: none;
+      background: transparent;
+      padding: 0 14px;
+      height: 38px;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .view-toggle button + button { border-left: 1px solid var(--border); }
+    .view-toggle button.active { background: var(--surface2); color: var(--text); font-weight: 500; }
+    .view-toggle button:hover:not(.active) { background: var(--surface2); }
+
+    .result-count {
+      font-size: 13px;
+      color: var(--text-faint);
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    /* ── MAIN CONTENT ── */
+    main { padding: 1.5rem 2.5rem 3rem; }
+
+    /* ── TABLE ── */
+    .table-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      overflow-x: auto;
+    }
+    table { width: 100%; border-collapse: collapse; min-width: 500px; }
+    thead th {
+      text-align: left;
+      padding: 11px 16px;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-faint);
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    thead th:hover { color: var(--text-muted); }
+    thead th.sorted { color: var(--text); }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #FAFAF8; }
+    tbody td { padding: 11px 16px; font-size: 14px; vertical-align: middle; }
+    .td-main { font-weight: 500; color: var(--text); }
+    .td-muted { color: var(--text-muted); }
+
+    /* ── BADGES ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .badge-avail { background: var(--accent-light); color: var(--accent); }
+    .badge-low    { background: var(--amber-light);  color: var(--amber);  }
+    .badge-out    { background: var(--red-light);    color: var(--red);    }
+
+    /* ── CARDS ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem 1.35rem;
+      transition: box-shadow 0.15s, transform 0.15s;
+    }
+    .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); transform: translateY(-1px); }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 400; line-height: 1.35; margin-bottom: 4px; }
+    .card-author { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
+    .card-attrs { font-size: 12px; color: var(--text-faint); margin-bottom: 10px; line-height: 1.8; }
+    .card-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--border); }
+    .card-qty { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 400; color: var(--text-muted); }
+
+    /* ── STATES ── */
+    .empty-state, .loading-state {
+      text-align: center;
+      padding: 5rem 2rem;
+      color: var(--text-faint);
+    }
+    .empty-state svg, .loading-state svg { margin-bottom: 1rem; opacity: 0.3; }
+    .empty-state p, .loading-state p { font-size: 15px; }
+
+    /* ── SETUP BANNER ── */
+    .setup-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+    .setup-banner h3 { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
+    .setup-banner p { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.7; }
+    .setup-banner ol { font-size: 14px; color: var(--text-muted); padding-left: 20px; margin-bottom: 1.25rem; line-height: 2; }
+    .custom-url-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .custom-url-row input {
+      flex: 1;
+      min-width: 200px;
+      height: 38px;
+      padding: 0 12px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+    }
+    .custom-url-row input:focus { border-color: var(--accent); }
+    .btn-primary {
+      height: 38px;
+      padding: 0 18px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+
+    /* ── SORT ARROW ── */
+    .sort-arr { opacity: 0; margin-left: 4px; }
+    th.sorted .sort-arr { opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      header { padding: 1.25rem 1.25rem 1rem; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat-item { flex: 1 1 45%; }
+      .toolbar { padding: 0.75rem 1.25rem; }
+      main { padding: 1rem 1.25rem 2.5rem; }
+      .brand h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <h1>Inventario Letteratura</h1>
+    <p id="last-update">Caricamento in corso...</p>
+  </div>
+  <button class="reload-header" onclick="reload()">
+    <span id="reload-icon">↻</span> Aggiorna
+  </button>
+</header>
+
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-label">Titoli</div><div class="stat-value" id="s-total">—</div></div>
+  <div class="stat-item"><div class="stat-label">Disponibili</div><div class="stat-value" id="s-avail">—</div></div>
+  <div class="stat-item"><div class="stat-label">Scorta bassa</div><div class="stat-value" id="s-low">—</div></div>
+  <div class="stat-item"><div class="stat-label">Esauriti</div><div class="stat-value" id="s-out">—</div></div>
+</div>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#1A1814" stroke-width="1.5"/><path d="M10.5 10.5L14 14" stroke="#1A1814" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <input type="text" id="search" placeholder="Cerca per titolo, autore, genere…">
+  </div>
+  <select id="filter-col"><option value="">Filtra per…</option></select>
+  <select id="filter-val"><option value="">Tutti</option></select>
+  <div class="view-toggle">
+    <button id="btn-table" class="active" onclick="setView('table')">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="2.5" rx="1" fill="currentColor" opacity=".5"/><rect x="1" y="5.5" width="12" height="2.5" rx="1" fill="currentColor" opacity=".5"/><rect x="1" y="10" width="12" height="2.5" rx="1" fill="currentColor" opacity=".5"/></svg>
+      Lista
+    </button>
+    <button id="btn-cards" onclick="setView('cards')">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5.5" height="5.5" rx="1.5" fill="currentColor" opacity=".5"/><rect x="7.5" y="1" width="5.5" height="5.5" rx="1.5" fill="currentColor" opacity=".5"/><rect x="1" y="7.5" width="5.5" height="5.5" rx="1.5" fill="currentColor" opacity=".5"/><rect x="7.5" y="7.5" width="5.5" height="5.5" rx="1.5" fill="currentColor" opacity=".5"/></svg>
+      Schede
+    </button>
+  </div>
+  <span class="result-count" id="result-count"></span>
+</div>
+
+<main>
+  <div class="setup-banner" id="setup-banner">
+    <h3>Configurazione accesso Google Sheets</h3>
+    <p>Per caricare i dati automaticamente, assicurati che il foglio sia condiviso pubblicamente:</p>
+    <ol>
+      <li>Apri il Google Sheets e clicca <strong>Condividi</strong></li>
+      <li>Cambia accesso in <strong>"Chiunque abbia il link"</strong> → Visualizzatore</li>
+      <li>Clicca <strong>Aggiorna</strong> in alto a destra</li>
+    </ol>
+    <p>Oppure incolla direttamente l'URL del file CSV esportato (File → Scarica → CSV):</p>
+    <div class="custom-url-row">
+      <input type="text" id="custom-url" placeholder="URL CSV o ID del Google Sheet…">
+      <button class="btn-primary" onclick="loadCustom()">Carica</button>
+    </div>
+  </div>
+
+  <div id="content">
+    <div class="loading-state">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" stroke="#1A1814" stroke-width="2" stroke-dasharray="80" stroke-dashoffset="20"><animateTransform attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="1s" repeatCount="indefinite"/></circle></svg>
+      <p>Caricamento inventario…</p>
+    </div>
+  </div>
+</main>
+
+<script>
+  const SHEET_ID = '1kH-ODNxH9DjUZJ__SoWmtW0_2VsPCQt5yXURjwSHRUE';
+  let allData = [], headers = [], currentView = 'table', sortCol = -1, sortAsc = true;
+
+  async function fetchSheet() {
+    const urls = [
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`,
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`,
+    ];
+    for (const url of urls) {
+      try {
+        const r = await fetch(url);
+        if (r.ok) {
+          const t = await r.text();
+          if (t && t.length > 20) return t;
+        }
+      } catch(e) {}
+    }
+    return null;
+  }
+
+  function parseCSV(text) {
+    const rows = [];
+    let inQ = false, cur = '', row = [];
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (c === '"') { inQ = !inQ; }
+      else if (c === ',' && !inQ) { row.push(cur.trim()); cur = ''; }
+      else if ((c === '\n' || c === '\r') && !inQ) {
+        if (text[i + 1] === '\n') i++;
+        row.push(cur.trim()); cur = '';
+        if (row.some(x => x)) rows.push(row);
+        row = [];
+      } else { cur += c; }
+    }
+    if (cur || row.length) { row.push(cur.trim()); if (row.some(x => x)) rows.push(row); }
+    return rows;
+  }
+
+  function detectQtyCol(hdrs) {
+    const kw = ['quantit', 'qty', 'copie', 'disponib', 'stock', 'q.ta', 'numero', 'pezzi'];
+    return hdrs.findIndex(h => kw.some(k => h.toLowerCase().includes(k)));
+  }
+
+  function getStatus(val) {
+    const n = parseInt(val);
+    if (isNaN(n) || n <= 0) return 'out';
+    if (n <= 2) return 'low';
+    return 'avail';
+  }
+
+  function badge(val) {
+    const s = getStatus(val);
+    const L = { avail: 'Disponibile', low: 'Scorta bassa', out: 'Esaurito' };
+    return `<span class="badge badge-${s}">${L[s]}</span>`;
+  }
+
+  function updateStats() {
+    const qc = detectQtyCol(headers);
+    document.getElementById('s-total').textContent = allData.length;
+    if (qc >= 0) {
+      document.getElementById('s-avail').textContent = allData.filter(r => getStatus(r[qc]) === 'avail').length;
+      document.getElementById('s-low').textContent = allData.filter(r => getStatus(r[qc]) === 'low').length;
+      document.getElementById('s-out').textContent = allData.filter(r => getStatus(r[qc]) === 'out').length;
+    } else {
+      ['s-avail','s-low','s-out'].forEach(id => document.getElementById(id).textContent = '—');
+    }
+  }
+
+  function populateFilters() {
+    const fc = document.getElementById('filter-col');
+    const fv = document.getElementById('filter-val');
+    fc.innerHTML = '<option value="">Filtra per…</option>';
+    headers.forEach((h, i) => {
+      const o = document.createElement('option');
+      o.value = i; o.textContent = h; fc.appendChild(o);
+    });
+    fc.onchange = () => {
+      const ci = parseInt(fc.value);
+      fv.innerHTML = '<option value="">Tutti</option>';
+      if (!isNaN(ci)) {
+        [...new Set(allData.map(r => r[ci]).filter(Boolean))].sort()
+          .forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; fv.appendChild(o); });
+      }
+      render();
+    };
+    fv.onchange = render;
+  }
+
+  function getFiltered() {
+    const q = document.getElementById('search').value.toLowerCase();
+    const fc = parseInt(document.getElementById('filter-col').value);
+    const fv = document.getElementById('filter-val').value;
+    let data = allData.filter(r => {
+      const mq = !q || r.some(c => c.toLowerCase().includes(q));
+      const mf = !fv || (!isNaN(fc) && r[fc] === fv);
+      return mq && mf;
+    });
+    if (sortCol >= 0) {
+      data.sort((a, b) => {
+        const av = a[sortCol] || '', bv = b[sortCol] || '';
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return sortAsc ? an - bn : bn - an;
+        return sortAsc ? av.localeCompare(bv, 'it') : bv.localeCompare(av, 'it');
+      });
+    }
+    return data;
+  }
+
+  function renderTable(data) {
+    const qc = detectQtyCol(headers);
+    if (data.length === 0) {
+      document.getElementById('content').innerHTML = `<div class="empty-state"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#1A1814" stroke-width="1.5"/><path d="M13 20h14M20 13v14" stroke="#1A1814" stroke-width="1.5" stroke-linecap="round"/></svg><p>Nessun risultato trovato</p></div>`;
+      return;
+    }
+    let h = `<div class="table-wrap"><table><thead><tr>`;
+    headers.forEach((hd, i) => {
+      const cls = sortCol === i ? 'sorted' : '';
+      const arr = sortCol === i ? (sortAsc ? '↑' : '↓') : '↕';
+      h += `<th class="${cls}" onclick="sortBy(${i})">${hd} <span class="sort-arr">${arr}</span></th>`;
+    });
+    h += `</tr></thead><tbody>`;
+    data.forEach(r => {
+      h += '<tr>';
+      r.forEach((c, i) => {
+        if (i === qc) {
+          h += `<td>${badge(c)} <span style="color:var(--text-faint);font-size:12px;margin-left:4px;">${c}</span></td>`;
+        } else if (i === 0) {
+          h += `<td class="td-main">${c}</td>`;
+        } else {
+          h += `<td class="td-muted">${c}</td>`;
+        }
+      });
+      h += '</tr>';
+    });
+    h += '</tbody></table></div>';
+    document.getElementById('content').innerHTML = h;
+  }
+
+  function renderCards(data) {
+    if (data.length === 0) {
+      document.getElementById('content').innerHTML = `<div class="empty-state"><p>Nessun risultato trovato</p></div>`;
+      return;
+    }
+    const qc = detectQtyCol(headers);
+    let aIdx = headers.findIndex(h => /autore|author/i.test(h));
+    if (aIdx < 0) aIdx = 1;
+    let h = '<div class="cards-grid">';
+    data.forEach(r => {
+      const qty = qc >= 0 ? r[qc] : '';
+      const author = aIdx >= 0 ? r[aIdx] : '';
+      const attrs = headers
+        .map((hd, i) => ({ hd, i }))
+        .filter(({ i }) => i !== 0 && i !== aIdx && i !== qc && r[i])
+        .map(({ hd, i }) => `<span style="display:block;">${hd}: ${r[i]}</span>`).join('');
+      h += `<div class="card">
+        <div class="card-title">${r[0] || '—'}</div>
+        ${author ? `<div class="card-author">${author}</div>` : ''}
+        ${attrs ? `<div class="card-attrs">${attrs}</div>` : ''}
+        <div class="card-foot">
+          <span>${qc >= 0 ? badge(qty) : ''}</span>
+          ${qc >= 0 ? `<span class="card-qty">${qty !== '' ? qty : '—'}</span>` : ''}
+        </div>
+      </div>`;
+    });
+    h += '</div>';
+    document.getElementById('content').innerHTML = h;
+  }
+
+  function render() {
+    const data = getFiltered();
+    document.getElementById('result-count').textContent = `${data.length} risultati`;
+    currentView === 'table' ? renderTable(data) : renderCards(data);
+  }
+
+  function sortBy(i) {
+    sortAsc = sortCol === i ? !sortAsc : true;
+    sortCol = i;
+    render();
+  }
+
+  function setView(v) {
+    currentView = v;
+    document.getElementById('btn-table').classList.toggle('active', v === 'table');
+    document.getElementById('btn-cards').classList.toggle('active', v === 'cards');
+    render();
+  }
+
+  function processCSV(text) {
+    const rows = parseCSV(text);
+    if (rows.length < 2) { showSetup(); return; }
+    headers = rows[0].map(h => h.replace(/^"|"$/g, ''));
+    allData = rows.slice(1).filter(r => r.some(c => c));
+    document.getElementById('setup-banner').style.display = 'none';
+    document.getElementById('last-update').textContent =
+      `${allData.length} titoli · Aggiornato il ${new Date().toLocaleDateString('it-IT', { day:'2-digit', month:'long', year:'numeric' })}`;
+    updateStats();
+    populateFilters();
+    render();
+  }
+
+  function showSetup() {
+    document.getElementById('setup-banner').style.display = 'block';
+    document.getElementById('content').innerHTML = `<div class="empty-state"><p>In attesa dei dati dal Google Sheets…</p></div>`;
+    document.getElementById('last-update').textContent = 'Configura l\'accesso per visualizzare i dati';
+  }
+
+  async function loadCustom() {
+    const url = document.getElementById('custom-url').value.trim();
+    if (!url) return;
+    try {
+      const r = await fetch(url);
+      if (r.ok) { processCSV(await r.text()); }
+      else { alert('Impossibile caricare il file. Verifica il link.'); }
+    } catch(e) { alert('Errore nel caricamento: ' + e.message); }
+  }
+
+  async function reload() {
+    const icon = document.getElementById('reload-icon');
+    icon.className = 'spin'; icon.textContent = '↻';
+    const csv = await fetchSheet();
+    icon.className = ''; icon.textContent = '↻';
+    if (csv) processCSV(csv);
+    else showSetup();
+  }
+
+  document.getElementById('search').addEventListener('input', render);
+
+  (async () => {
+    const csv = await fetchSheet();
+    if (csv) processCSV(csv);
+    else showSetup();
+  })();
+</script>
+</body>
+</html>
