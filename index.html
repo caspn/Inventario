@@ -82,7 +82,8 @@
 
     /* ── TABLE DESKTOP ── */
     .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-    table { width: 100%; border-collapse: collapse; }
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    td, th { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     thead th { text-align: left; padding: 11px 16px; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-faint); background: var(--surface2); border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; white-space: nowrap; }
     thead th:hover { color: var(--text-muted); }
     thead th.sorted { color: var(--text); }
