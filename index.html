@@ -258,7 +258,11 @@
       .header-inner { max-width: 100%; }
       .header-title { font-size: 17px; }
       .form-section { padding: 0.75rem 1rem; }
-      .form-inner { width: 100%; }
+      .form-inner { width: 100%; flex-direction: column; }
+      .form-group { min-width: 0; width: 100%; }
+      .form-group select, .form-group input[type="number"] { width: 100%; }
+      .form-actions { width: 100%; }
+      .btn-add, .btn-remove { flex: 1; text-align: center; }
       .toolbar { padding: 0.75rem 1rem; }
       .legend { display: none; }
       main { padding: 1rem 1rem 2.5rem; }
