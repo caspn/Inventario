@@ -300,19 +300,29 @@
 <!-- FORM AGGIORNAMENTO -->
 <div class="form-section">
   <div class="form-inner">
-    <div class="form-group">
-      <label>Documento</label>
-      <select id="doc-select">
-        <option value="">— seleziona —</option>
-      </select>
+    <!-- Riga 1: dropdown documento (piena larghezza) -->
+    <div class="form-row-full">
+      <div class="form-group">
+        <label>Documento</label>
+        <select id="doc-select">
+          <option value="">— seleziona —</option>
+        </select>
+      </div>
     </div>
-    <div class="form-group" id="qty-group" style="max-width:140px;">
-      <label>Quantità</label>
-      <input type="number" id="qty-input" min="1" placeholder="es. 5">
-    </div>
-    <div class="form-actions">
-      <button class="btn-add"    id="btn-add"    onclick="updateQty('add')"    disabled>+ Aggiungi</button>
-      <button class="btn-remove" id="btn-remove" onclick="updateQty('remove')" disabled>− Rimuovi</button>
+    <!-- Riga 2: quantità + pulsanti -->
+    <div class="form-row-actions">
+      <div class="form-group form-col-qty">
+        <label>Quantità</label>
+        <input type="number" id="qty-input" min="1" placeholder="es. 5">
+      </div>
+      <div class="form-col-btn">
+        <label>&nbsp;</label>
+        <button class="btn-add" id="btn-add" onclick="updateQty('add')" disabled>+ Aggiungi</button>
+      </div>
+      <div class="form-col-btn">
+        <label>&nbsp;</label>
+        <button class="btn-remove" id="btn-remove" onclick="updateQty('remove')" disabled>− Rimuovi</button>
+      </div>
     </div>
   </div>
 </div>
