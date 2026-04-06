@@ -56,18 +56,15 @@
     .search-wrap input { width: 100%; height: 38px; padding: 0 12px 0 38px; border: 1px solid var(--border-strong); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; }
     .search-wrap input:focus { border-color: var(--accent); }
     .search-wrap input::placeholder { color: var(--text-faint); }
-
     select { height: 38px; padding: 0 32px 0 12px; border: 1px solid var(--border-strong); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 14px; font-family: 'DM Sans', sans-serif; cursor: pointer; outline: none; appearance: none; min-width: 130px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
     select:focus { border-color: var(--accent); }
-
     .view-toggle { display: flex; border: 1px solid var(--border-strong); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
     .view-toggle button { border: none; background: transparent; padding: 0 14px; height: 38px; cursor: pointer; font-size: 13px; font-family: 'DM Sans', sans-serif; color: var(--text-muted); display: flex; align-items: center; gap: 6px; transition: all 0.15s; }
     .view-toggle button + button { border-left: 1px solid var(--border); }
     .view-toggle button.active { background: var(--surface2); color: var(--text); font-weight: 500; }
     .view-toggle button:hover:not(.active) { background: var(--surface2); }
     .result-count { font-size: 13px; color: var(--text-faint); margin-left: auto; white-space: nowrap; }
-
-    .legend { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .legend { display: flex; gap: 16px; align-items: center; }
     .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
     .legend-dot { width: 12px; height: 12px; border-radius: 3px; border: 2px solid; }
     .legend-dot.low { border-color: var(--row-low); background: var(--row-low-bg); }
@@ -76,7 +73,13 @@
     /* ── MAIN ── */
     main { padding: 1.5rem 2.5rem 3rem; }
 
-    /* ── TABLE — DESKTOP ── */
+    /* ── BADGES ── */
+    .badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 500; }
+    .badge-avail { background: var(--accent-light); color: var(--accent); }
+    .badge-low   { background: var(--amber-light);  color: var(--amber); }
+    .badge-out   { background: var(--red-light);    color: var(--red); }
+
+    /* ── TABLE DESKTOP ── */
     .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
     table { width: 100%; border-collapse: collapse; }
     thead th { text-align: left; padding: 11px 16px; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-faint); background: var(--surface2); border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; white-space: nowrap; }
@@ -92,76 +95,111 @@
     .td-muted { color: var(--text-muted); }
     .sort-arr { opacity: 0; margin-left: 4px; }
     th.sorted .sort-arr { opacity: 1; }
-
-    .thumb { width: 36px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border); display: block; }
+    .thumb { width: 36px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border); display: block; cursor: pointer; transition: opacity 0.15s; }
+    .thumb:hover { opacity: 0.8; }
     .thumb-placeholder { width: 36px; height: 50px; border-radius: 4px; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-faint); font-size: 18px; }
 
-    /* ── TABLE — MOBILE: ogni riga diventa una card verticale ── */
-    @media (max-width: 640px) {
-      .table-wrap { background: transparent; border: none; border-radius: 0; overflow: visible; }
-      table, thead, tbody, tr, td { display: block; width: 100%; }
-      thead { display: none; } /* nasconde intestazioni */
+    /* ── MOBILE LIST: 2 colonne ── */
+    .mobile-list { display: none; flex-direction: column; gap: 10px; }
 
-      tbody tr {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        margin-bottom: 12px;
-        padding: 0;
-        box-shadow: none;
-        overflow: hidden;
-      }
-      tbody tr.row-out { background: var(--row-out-bg); border: 2px solid var(--row-out); box-shadow: none; }
-      tbody tr.row-low { background: var(--row-low-bg); border: 2px solid var(--row-low); box-shadow: none; }
-      tbody tr:last-child { border-bottom: 1px solid var(--border); margin-bottom: 0; }
-      tbody tr.row-out:last-child { border: 2px solid var(--row-out); }
-      tbody tr.row-low:last-child { border: 2px solid var(--row-low); }
-
-      /* riga copertina: immagine a tutta larghezza in cima */
-      td.td-cover { padding: 0; }
-      td.td-cover img.thumb {
-        width: 100%; height: 180px; border-radius: 0;
-        border: none; border-bottom: 1px solid var(--border);
-        object-fit: cover; object-position: top;
-      }
-      td.td-cover .thumb-placeholder {
-        width: 100%; height: 100px; border-radius: 0;
-        border: none; border-bottom: 1px solid var(--border);
-        font-size: 36px;
-      }
-
-      /* celle dati: layout label : valore */
-      td[data-label] {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 12px;
-        padding: 9px 16px;
-        font-size: 14px;
-        border-bottom: 1px solid var(--border);
-      }
-      td[data-label]:last-child { border-bottom: none; }
-      td[data-label]::before {
-        content: attr(data-label);
-        font-size: 11px;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        color: var(--text-faint);
-        white-space: nowrap;
-        padding-top: 2px;
-        min-width: 90px;
-        flex-shrink: 0;
-      }
-      td[data-label].td-main { font-weight: 500; font-size: 15px; }
-      td[data-label].td-muted { color: var(--text-muted); }
+    .m-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
     }
+    .m-card.m-low { border: 2px solid var(--row-low); background: var(--row-low-bg); }
+    .m-card.m-out { border: 2px solid var(--row-out); background: var(--row-out-bg); }
 
-    /* ── BADGES ── */
-    .badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 500; letter-spacing: 0.02em; }
-    .badge-avail { background: var(--accent-light); color: var(--accent); }
-    .badge-low   { background: var(--amber-light);  color: var(--amber); }
-    .badge-out   { background: var(--red-light);    color: var(--red); }
+    /* colonna sinistra: miniatura */
+    .m-thumb-wrap {
+      flex-shrink: 0;
+      width: 80px;
+      background: var(--surface2);
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .m-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: opacity 0.15s;
+    }
+    .m-thumb-wrap:hover img { opacity: 0.85; }
+    .m-thumb-wrap .zoom-icon {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      background: rgba(0,0,0,0.45);
+      border-radius: 4px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .m-thumb-wrap:hover .zoom-icon { opacity: 1; }
+    .m-thumb-wrap .zoom-icon svg { width: 11px; height: 11px; }
+    .m-no-img { font-size: 28px; color: var(--text-faint); }
+
+    /* colonna destra: dati */
+    .m-body { flex: 1; padding: 10px 13px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .m-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 400; line-height: 1.3; color: var(--text); }
+    .m-row { display: flex; flex-direction: column; }
+    .m-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); font-weight: 500; line-height: 1.2; }
+    .m-value { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
+    .m-status { margin-top: 4px; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      font-size: 20px;
+      line-height: 1;
+      transition: background 0.15s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.28); }
 
     /* ── CARDS VIEW ── */
     .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
@@ -169,7 +207,7 @@
     .card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
     .card.card-out { border: 2px solid var(--row-out); background: var(--row-out-bg); }
     .card.card-low { border: 2px solid var(--row-low); background: var(--row-low-bg); }
-    .card-cover { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; }
+    .card-cover { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; cursor: pointer; }
     .card-cover-placeholder { width: 100%; aspect-ratio: 2/3; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 48px; color: var(--text-faint); border-bottom: 1px solid var(--border); }
     .card-body { padding: 1rem 1.1rem; flex: 1; display: flex; flex-direction: column; }
     .card-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 400; line-height: 1.35; margin-bottom: 3px; }
@@ -193,20 +231,32 @@
     .btn-primary { height: 38px; padding: 0 18px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 500; cursor: pointer; transition: opacity 0.15s; }
     .btn-primary:hover { opacity: 0.88; }
 
-    /* ── RESPONSIVE GENERALI ── */
-    @media (max-width: 700px) {
-      header { padding: 1.25rem 1.25rem 1rem; }
-      .brand h1 { font-size: 22px; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      header { padding: 1.25rem 1rem 1rem; }
+      .brand h1 { font-size: 21px; }
       .stats-bar { flex-wrap: wrap; }
-      .stat-item { flex: 1 1 45%; }
+      .stat-item { flex: 1 1 45%; padding: 0.75rem 1rem; }
+      .stat-value { font-size: 22px; }
       .toolbar { padding: 0.75rem 1rem; }
-      main { padding: 1rem 1rem 2.5rem; }
       .legend { display: none; }
-      .cards-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+      main { padding: 1rem 1rem 2.5rem; }
+
+      /* su mobile: nascondi tabella desktop, mostra mobile-list */
+      .table-wrap { display: none; }
+      .mobile-list { display: flex; }
+
+      .cards-grid { grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 10px; }
     }
   </style>
 </head>
 <body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
 
 <header>
   <div class="brand">
@@ -278,8 +328,10 @@
 
 <script>
   const SHEET_ID = '1kH-ODNxH9DjUZJ__SoWmtW0_2VsPCQt5yXURjwSHRUE';
-  const COL_QTY = 3; // colonna D (0-based)
-  const COL_MIN = 4; // colonna E (0-based) — nascosta
+  const COL_QTY = 3; // D (0-based)
+  const COL_MIN = 4; // E (0-based) — usata per calcoli, non mostrata
+  // Colonne visibili su mobile: A(0), B(1), C(2), D(3) — E nascosta
+  const MOBILE_COLS = [0, 1, 2, 3];
 
   let allData = [], headers = [], currentView = 'table', sortCol = -1, sortAsc = true;
 
@@ -308,22 +360,37 @@
     try { const u = new URL(str); return u.protocol==='http:'||u.protocol==='https:'; } catch { return false; }
   }
 
-  function updateStats() {
-    document.getElementById('s-total').textContent = allData.length;
-    document.getElementById('s-avail').textContent = allData.filter(r => rowStatus(r)==='ok').length;
-    document.getElementById('s-low').textContent   = allData.filter(r => rowStatus(r)==='low').length;
-    document.getElementById('s-out').textContent   = allData.filter(r => rowStatus(r)==='out').length;
-  }
-
+  // Colonne visibili su desktop (esclude COL_MIN e colonna immagine)
   function visibleCols(ic) {
     return headers.map((_,i)=>i).filter(i => i!==COL_MIN && i!==ic);
   }
 
+  function openLightbox(url) {
+    document.getElementById('lightbox-img').src = url;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightbox-img').src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  function updateStats() {
+    document.getElementById('s-total').textContent = allData.length;
+    document.getElementById('s-avail').textContent = allData.filter(r=>rowStatus(r)==='ok').length;
+    document.getElementById('s-low').textContent   = allData.filter(r=>rowStatus(r)==='low').length;
+    document.getElementById('s-out').textContent   = allData.filter(r=>rowStatus(r)==='out').length;
+  }
+
   function populateFilters() {
-    const ic = detectCol(headers, imgKw);
+    const ic  = detectCol(headers, imgKw);
     const vis = visibleCols(ic);
-    const fc = document.getElementById('filter-col');
-    const fv = document.getElementById('filter-val');
+    const fc  = document.getElementById('filter-col');
+    const fv  = document.getElementById('filter-val');
     fc.innerHTML = '<option value="">Filtra per…</option>';
     vis.forEach(i => {
       const o = document.createElement('option');
@@ -371,47 +438,84 @@
       return;
     }
 
-    let h = `<div class="table-wrap"><table><thead><tr>`;
-    if (ic >= 0) h += `<th style="width:56px;cursor:default;"></th>`;
+    // ── DESKTOP TABLE ──
+    let t = `<div class="table-wrap"><table><thead><tr>`;
+    if (ic >= 0) t += `<th style="width:56px;cursor:default;"></th>`;
     vis.forEach(i => {
-      const cls = sortCol===i ? 'sorted' : '';
-      const arr = sortCol===i ? (sortAsc?'↑':'↓') : '↕';
+      const cls   = sortCol===i ? 'sorted' : '';
+      const arr   = sortCol===i ? (sortAsc?'↑':'↓') : '↕';
       const label = i===COL_QTY ? 'Disponibilità' : headers[i];
-      h += `<th class="${cls}" onclick="sortBy(${i})">${label} <span class="sort-arr">${arr}</span></th>`;
+      t += `<th class="${cls}" onclick="sortBy(${i})">${label} <span class="sort-arr">${arr}</span></th>`;
     });
-    h += `</tr></thead><tbody>`;
+    t += `</tr></thead><tbody>`;
 
     data.forEach(r => {
       const status = rowStatus(r);
-      const rowCls = status==='out' ? 'row-out' : status==='low' ? 'row-low' : '';
-      h += `<tr class="${rowCls}">`;
-
-      // Thumbnail (desktop) / immagine top (mobile)
+      const rowCls = status==='out'?'row-out':status==='low'?'row-low':'';
+      t += `<tr class="${rowCls}">`;
       if (ic >= 0) {
-        const url = r[ic] || '';
+        const url = r[ic]||'';
         if (url && isUrl(url)) {
-          h += `<td class="td-cover" style="padding:6px 8px 6px 16px;"><img src="${url}" class="thumb" loading="lazy" onerror="this.outerHTML='<div class=\\'thumb-placeholder\\'>📖</div>'"></td>`;
+          t += `<td style="padding:6px 8px 6px 16px;"><img src="${url}" class="thumb" loading="lazy" onclick="openLightbox('${url.replace(/'/g,"\\'")}')" onerror="this.outerHTML='<div class=\\'thumb-placeholder\\'>📖</div>'"></td>`;
         } else {
-          h += `<td class="td-cover" style="padding:6px 8px 6px 16px;"><div class="thumb-placeholder">📖</div></td>`;
+          t += `<td style="padding:6px 8px 6px 16px;"><div class="thumb-placeholder">📖</div></td>`;
         }
       }
-
       vis.forEach(i => {
-        const c = r[i] || '';
-        const label = i===COL_QTY ? 'Disponibilità' : headers[i];
-        if (i === COL_QTY) {
-          h += `<td data-label="${label}">${badge(status)} <span style="color:var(--text-faint);font-size:12px;margin-left:4px;">${c}</span></td>`;
-        } else if (i === 0) {
-          h += `<td data-label="${label}" class="td-main">${c}</td>`;
+        const c = r[i]||'';
+        const label = i===COL_QTY?'Disponibilità':headers[i];
+        if (i===COL_QTY) {
+          t += `<td data-label="${label}">${badge(status)} <span style="color:var(--text-faint);font-size:12px;margin-left:4px;">${c}</span></td>`;
+        } else if (i===0) {
+          t += `<td data-label="${label}" class="td-main">${c}</td>`;
         } else {
-          h += `<td data-label="${label}" class="td-muted">${c}</td>`;
+          t += `<td data-label="${label}" class="td-muted">${c}</td>`;
         }
       });
-      h += '</tr>';
+      t += '</tr>';
     });
+    t += '</tbody></table></div>';
 
-    h += '</tbody></table></div>';
-    document.getElementById('content').innerHTML = h;
+    // ── MOBILE LIST: 2 colonne ──
+    const ic2 = ic; // alias per leggibilità
+    let m = `<div class="mobile-list">`;
+    data.forEach(r => {
+      const status  = rowStatus(r);
+      const cardCls = status==='out'?'m-card m-out':status==='low'?'m-card m-low':'m-card';
+      const imgUrl  = ic2>=0 ? (r[ic2]||'') : '';
+
+      // Thumb colonna sinistra
+      let thumbHtml = '';
+      if (imgUrl && isUrl(imgUrl)) {
+        thumbHtml = `<div class="m-thumb-wrap" onclick="openLightbox('${imgUrl.replace(/'/g,"\\'")}')">
+          <img src="${imgUrl}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=\\'m-no-img\\'>📖</span>'">
+          <span class="zoom-icon"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="1.5"><circle cx="5" cy="5" r="3.5"/><path d="M8 8l2.5 2.5" stroke-linecap="round"/><path d="M3.5 5h3M5 3.5v3" stroke-linecap="round"/></svg></span>
+        </div>`;
+      } else {
+        thumbHtml = `<div class="m-thumb-wrap"><span class="m-no-img">📖</span></div>`;
+      }
+
+      // Dati: solo colonne A-D visibili (escludi immagine e COL_MIN)
+      const mobileCols = MOBILE_COLS.filter(i => i!==ic2);
+      let dataHtml = '';
+      mobileCols.forEach(i => {
+        const val = r[i]||'';
+        if (!val && i!==0) return;
+        const label = i===COL_QTY ? 'Disponibilità' : headers[i]||'';
+        if (i===0) {
+          dataHtml += `<div class="m-title">${val||'—'}</div>`;
+        } else if (i===COL_QTY) {
+          dataHtml += `<div class="m-status">${badge(status)} <span style="font-size:12px;color:var(--text-faint);margin-left:4px;">${val}</span></div>`;
+        } else {
+          dataHtml += `<div class="m-row"><span class="m-label">${label}</span><span class="m-value">${val}</span></div>`;
+        }
+      });
+
+      m += `<div class="${cardCls}">${thumbHtml}<div class="m-body">${dataHtml}</div></div>`;
+    });
+    m += '</div>';
+
+    document.getElementById('content').innerHTML = t + m;
   }
 
   function renderCards(data) {
@@ -420,28 +524,28 @@
       return;
     }
     const ic  = detectCol(headers, imgKw);
-    const ac  = detectCol(headers, authKw) >= 0 ? detectCol(headers, authKw) : (headers.length > 1 ? 1 : -1);
+    const ac  = detectCol(headers, authKw)>=0 ? detectCol(headers, authKw) : (headers.length>1?1:-1);
     const vis = visibleCols(ic);
 
     let h = '<div class="cards-grid">';
     data.forEach(r => {
       const status  = rowStatus(r);
-      const cardCls = status==='out' ? 'card card-out' : status==='low' ? 'card card-low' : 'card';
-      const imgUrl  = ic >= 0 ? (r[ic]||'') : '';
-      const author  = ac >= 0 ? r[ac] : '';
+      const cardCls = status==='out'?'card card-out':status==='low'?'card card-low':'card';
+      const imgUrl  = ic>=0 ? (r[ic]||'') : '';
+      const author  = ac>=0 ? r[ac] : '';
       const attrs   = vis.filter(i=>i!==0&&i!==ac&&i!==COL_QTY&&r[i])
         .map(i=>`<span style="display:block;">${headers[i]}: ${r[i]}</span>`).join('');
 
       const coverHtml = (imgUrl && isUrl(imgUrl))
-        ? `<img src="${imgUrl}" class="card-cover" alt="${(r[0]||'').replace(/"/g,'&quot;')}" loading="lazy" onerror="this.outerHTML='<div class=\\'card-cover-placeholder\\'>📖</div>'">`
+        ? `<img src="${imgUrl}" class="card-cover" alt="${(r[0]||'').replace(/"/g,'&quot;')}" loading="lazy" onclick="openLightbox('${imgUrl.replace(/'/g,"\\'")}')}" onerror="this.outerHTML='<div class=\\'card-cover-placeholder\\'>📖</div>'">`
         : `<div class="card-cover-placeholder">📖</div>`;
 
       h += `<div class="${cardCls}">
         ${coverHtml}
         <div class="card-body">
           <div class="card-title">${r[0]||'—'}</div>
-          ${author ? `<div class="card-author">${author}</div>` : ''}
-          ${attrs  ? `<div class="card-attrs">${attrs}</div>` : ''}
+          ${author?`<div class="card-author">${author}</div>`:''}
+          ${attrs?`<div class="card-attrs">${attrs}</div>`:''}
           <div class="card-foot">
             ${badge(status)}
             <span class="card-qty">${r[COL_QTY]!==undefined?r[COL_QTY]:'—'}</span>
@@ -459,7 +563,7 @@
     currentView==='table' ? renderTable(data) : renderCards(data);
   }
 
-  function sortBy(i) { sortAsc = sortCol===i ? !sortAsc : true; sortCol=i; render(); }
+  function sortBy(i) { sortAsc=sortCol===i?!sortAsc:true; sortCol=i; render(); }
 
   function setView(v) {
     currentView = v;
@@ -472,15 +576,15 @@
     const rows=[]; let inQ=false, cur='', row=[];
     for (let i=0;i<text.length;i++) {
       const c=text[i];
-      if (c==='"') { inQ=!inQ; }
-      else if (c===','&&!inQ) { row.push(cur.trim()); cur=''; }
-      else if ((c==='\n'||c==='\r')&&!inQ) {
-        if (text[i+1]==='\n') i++;
-        row.push(cur.trim()); cur='';
-        if (row.some(x=>x)) rows.push(row); row=[];
-      } else { cur+=c; }
+      if (c==='"'){inQ=!inQ;}
+      else if (c===','&&!inQ){row.push(cur.trim());cur='';}
+      else if ((c==='\n'||c==='\r')&&!inQ){
+        if(text[i+1]==='\n')i++;
+        row.push(cur.trim());cur='';
+        if(row.some(x=>x))rows.push(row);row=[];
+      } else {cur+=c;}
     }
-    if (cur||row.length) { row.push(cur.trim()); if (row.some(x=>x)) rows.push(row); }
+    if(cur||row.length){row.push(cur.trim());if(row.some(x=>x))rows.push(row);}
     return rows;
   }
 
@@ -491,7 +595,7 @@
     allData = rows.slice(1).filter(r=>r.some(c=>c));
     document.getElementById('setup-banner').style.display = 'none';
     const ic = detectCol(headers, imgKw);
-    const hint = ic>=0 ? ' · copertine attive' : '';
+    const hint = ic>=0?' · copertine attive':'';
     document.getElementById('last-update').textContent =
       `${allData.length} titoli${hint} · Aggiornato il ${new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'})}`;
     updateStats(); populateFilters(); render();
@@ -504,34 +608,33 @@
   }
 
   async function fetchSheet() {
-    const urls = [
+    const urls=[
       `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`,
       `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`,
     ];
     for (const url of urls) {
-      try { const r=await fetch(url); if (r.ok){const t=await r.text(); if(t&&t.length>20) return t;} } catch(e){}
+      try{const r=await fetch(url);if(r.ok){const t=await r.text();if(t&&t.length>20)return t;}}catch(e){}
     }
     return null;
   }
 
   async function loadCustom() {
-    const url = document.getElementById('custom-url').value.trim();
-    if (!url) return;
-    try { const r=await fetch(url); if(r.ok) processCSV(await r.text()); else alert('Impossibile caricare il file.'); }
-    catch(e) { alert('Errore: '+e.message); }
+    const url=document.getElementById('custom-url').value.trim();
+    if(!url)return;
+    try{const r=await fetch(url);if(r.ok)processCSV(await r.text());else alert('Impossibile caricare il file.');}
+    catch(e){alert('Errore: '+e.message);}
   }
 
   async function reload() {
-    const icon = document.getElementById('reload-icon');
-    icon.className = 'spin';
-    const csv = await fetchSheet();
-    icon.className = '';
-    if (csv) processCSV(csv); else showSetup();
+    const icon=document.getElementById('reload-icon');
+    icon.className='spin';
+    const csv=await fetchSheet();
+    icon.className='';
+    if(csv)processCSV(csv);else showSetup();
   }
 
   document.getElementById('search').addEventListener('input', render);
-
-  (async () => { const csv=await fetchSheet(); if(csv) processCSV(csv); else showSetup(); })();
+  (async()=>{const csv=await fetchSheet();if(csv)processCSV(csv);else showSetup();})();
 </script>
 </body>
 </html>
