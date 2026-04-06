@@ -34,6 +34,7 @@
 
     body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.6; }
 
+    /* ── HEADER ── */
     header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 2rem 2.5rem 1.75rem; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; }
     .brand h1 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 400; letter-spacing: -0.3px; }
     .brand p { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
@@ -42,19 +43,21 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     .spin { display: inline-block; animation: spin 1s linear infinite; }
 
+    /* ── STATS ── */
     .stats-bar { display: flex; gap: 1px; background: var(--border); border-bottom: 1px solid var(--border); }
     .stat-item { flex: 1; background: var(--surface); padding: 1rem 1.5rem; min-width: 0; }
     .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); font-weight: 500; }
     .stat-value { font-size: 26px; font-weight: 300; color: var(--text); margin-top: 2px; font-family: 'Playfair Display', serif; }
 
+    /* ── TOOLBAR ── */
     .toolbar { padding: 1rem 2.5rem; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: var(--bg); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
-    .search-wrap { flex: 1; min-width: 220px; position: relative; }
+    .search-wrap { flex: 1; min-width: 200px; position: relative; }
     .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); opacity: 0.4; pointer-events: none; }
     .search-wrap input { width: 100%; height: 38px; padding: 0 12px 0 38px; border: 1px solid var(--border-strong); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; }
     .search-wrap input:focus { border-color: var(--accent); }
     .search-wrap input::placeholder { color: var(--text-faint); }
 
-    select { height: 38px; padding: 0 32px 0 12px; border: 1px solid var(--border-strong); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 14px; font-family: 'DM Sans', sans-serif; cursor: pointer; outline: none; appearance: none; min-width: 140px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+    select { height: 38px; padding: 0 32px 0 12px; border: 1px solid var(--border-strong); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 14px; font-family: 'DM Sans', sans-serif; cursor: pointer; outline: none; appearance: none; min-width: 130px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
     select:focus { border-color: var(--accent); }
 
     .view-toggle { display: flex; border: 1px solid var(--border-strong); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
@@ -64,52 +67,110 @@
     .view-toggle button:hover:not(.active) { background: var(--surface2); }
     .result-count { font-size: 13px; color: var(--text-faint); margin-left: auto; white-space: nowrap; }
 
-    /* LEGEND */
     .legend { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
     .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
     .legend-dot { width: 12px; height: 12px; border-radius: 3px; border: 2px solid; }
     .legend-dot.low { border-color: var(--row-low); background: var(--row-low-bg); }
     .legend-dot.out { border-color: var(--row-out); background: var(--row-out-bg); }
 
+    /* ── MAIN ── */
     main { padding: 1.5rem 2.5rem 3rem; }
 
-    /* TABLE */
-    .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; min-width: 500px; }
+    /* ── TABLE — DESKTOP ── */
+    .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; }
     thead th { text-align: left; padding: 11px 16px; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-faint); background: var(--surface2); border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; white-space: nowrap; }
     thead th:hover { color: var(--text-muted); }
     thead th.sorted { color: var(--text); }
-
     tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
     tbody tr:last-child { border-bottom: none; }
     tbody tr:hover { filter: brightness(0.97); }
-
-    /* Alert rows */
     tbody tr.row-out { background: var(--row-out-bg); box-shadow: inset 3px 0 0 var(--row-out); }
     tbody tr.row-low { background: var(--row-low-bg); box-shadow: inset 3px 0 0 var(--row-low); }
-
     tbody td { padding: 10px 16px; font-size: 14px; vertical-align: middle; }
     .td-main { font-weight: 500; }
     .td-muted { color: var(--text-muted); }
+    .sort-arr { opacity: 0; margin-left: 4px; }
+    th.sorted .sort-arr { opacity: 1; }
 
     .thumb { width: 36px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border); display: block; }
     .thumb-placeholder { width: 36px; height: 50px; border-radius: 4px; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-faint); font-size: 18px; }
 
+    /* ── TABLE — MOBILE: ogni riga diventa una card verticale ── */
+    @media (max-width: 640px) {
+      .table-wrap { background: transparent; border: none; border-radius: 0; overflow: visible; }
+      table, thead, tbody, tr, td { display: block; width: 100%; }
+      thead { display: none; } /* nasconde intestazioni */
+
+      tbody tr {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        margin-bottom: 12px;
+        padding: 0;
+        box-shadow: none;
+        overflow: hidden;
+      }
+      tbody tr.row-out { background: var(--row-out-bg); border: 2px solid var(--row-out); box-shadow: none; }
+      tbody tr.row-low { background: var(--row-low-bg); border: 2px solid var(--row-low); box-shadow: none; }
+      tbody tr:last-child { border-bottom: 1px solid var(--border); margin-bottom: 0; }
+      tbody tr.row-out:last-child { border: 2px solid var(--row-out); }
+      tbody tr.row-low:last-child { border: 2px solid var(--row-low); }
+
+      /* riga copertina: immagine a tutta larghezza in cima */
+      td.td-cover { padding: 0; }
+      td.td-cover img.thumb {
+        width: 100%; height: 180px; border-radius: 0;
+        border: none; border-bottom: 1px solid var(--border);
+        object-fit: cover; object-position: top;
+      }
+      td.td-cover .thumb-placeholder {
+        width: 100%; height: 100px; border-radius: 0;
+        border: none; border-bottom: 1px solid var(--border);
+        font-size: 36px;
+      }
+
+      /* celle dati: layout label : valore */
+      td[data-label] {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 9px 16px;
+        font-size: 14px;
+        border-bottom: 1px solid var(--border);
+      }
+      td[data-label]:last-child { border-bottom: none; }
+      td[data-label]::before {
+        content: attr(data-label);
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--text-faint);
+        white-space: nowrap;
+        padding-top: 2px;
+        min-width: 90px;
+        flex-shrink: 0;
+      }
+      td[data-label].td-main { font-weight: 500; font-size: 15px; }
+      td[data-label].td-muted { color: var(--text-muted); }
+    }
+
+    /* ── BADGES ── */
     .badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 500; letter-spacing: 0.02em; }
     .badge-avail { background: var(--accent-light); color: var(--accent); }
     .badge-low   { background: var(--amber-light);  color: var(--amber); }
     .badge-out   { background: var(--red-light);    color: var(--red); }
 
-    /* CARDS */
+    /* ── CARDS VIEW ── */
     .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
     .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: box-shadow 0.15s, transform 0.15s; display: flex; flex-direction: column; }
     .card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
     .card.card-out { border: 2px solid var(--row-out); background: var(--row-out-bg); }
     .card.card-low { border: 2px solid var(--row-low); background: var(--row-low-bg); }
-
     .card-cover { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; }
     .card-cover-placeholder { width: 100%; aspect-ratio: 2/3; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 48px; color: var(--text-faint); border-bottom: 1px solid var(--border); }
-
     .card-body { padding: 1rem 1.1rem; flex: 1; display: flex; flex-direction: column; }
     .card-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 400; line-height: 1.35; margin-bottom: 3px; }
     .card-author { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
@@ -117,9 +178,11 @@
     .card-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--border); margin-top: auto; }
     .card-qty { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--text-muted); }
 
+    /* ── STATES ── */
     .empty-state, .loading-state { text-align: center; padding: 5rem 2rem; color: var(--text-faint); }
     .empty-state p, .loading-state p { font-size: 15px; margin-top: 1rem; }
 
+    /* ── SETUP BANNER ── */
     .setup-banner { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 1.5rem; display: none; }
     .setup-banner h3 { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
     .setup-banner p { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.7; }
@@ -130,16 +193,15 @@
     .btn-primary { height: 38px; padding: 0 18px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 500; cursor: pointer; transition: opacity 0.15s; }
     .btn-primary:hover { opacity: 0.88; }
 
-    .sort-arr { opacity: 0; margin-left: 4px; }
-    th.sorted .sort-arr { opacity: 1; }
-
+    /* ── RESPONSIVE GENERALI ── */
     @media (max-width: 700px) {
       header { padding: 1.25rem 1.25rem 1rem; }
+      .brand h1 { font-size: 22px; }
       .stats-bar { flex-wrap: wrap; }
       .stat-item { flex: 1 1 45%; }
-      .toolbar { padding: 0.75rem 1.25rem; }
-      main { padding: 1rem 1.25rem 2.5rem; }
-      .brand h1 { font-size: 22px; }
+      .toolbar { padding: 0.75rem 1rem; }
+      main { padding: 1rem 1rem 2.5rem; }
+      .legend { display: none; }
       .cards-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
     }
   </style>
@@ -166,7 +228,7 @@
 <div class="toolbar">
   <div class="search-wrap">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#1A1814" stroke-width="1.5"/><path d="M10.5 10.5L14 14" stroke="#1A1814" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <input type="text" id="search" placeholder="Cerca titolo, autore, genere…">
+    <input type="text" id="search" placeholder="Cerca titolo, autore…">
   </div>
   <select id="filter-col"><option value="">Filtra per…</option></select>
   <select id="filter-val"><option value="">Tutti</option></select>
@@ -197,11 +259,11 @@
       <li>Salva e clicca <strong>Aggiorna</strong> in alto a destra</li>
     </ol>
     <div class="hint-box">
-      <strong>Per le copertine:</strong> aggiungi una colonna chiamata <strong>Copertina</strong> (o <em>Immagine / Cover</em>) con l'URL diretto dell'immagine per ogni libro.
+      <strong>Per le copertine:</strong> aggiungi una colonna chiamata <strong>Copertina</strong> (o <em>Immagine / Cover</em>) con l'URL diretto per ogni libro.
     </div>
-    <p>Oppure carica direttamente un file CSV (File → Scarica → Valori separati da virgola):</p>
+    <p>Oppure carica un file CSV (File → Scarica → Valori separati da virgola):</p>
     <div class="custom-url-row">
-      <input type="text" id="custom-url" placeholder="URL CSV pubblico o ID del Google Sheet…">
+      <input type="text" id="custom-url" placeholder="URL CSV pubblico…">
       <button class="btn-primary" onclick="loadCustom()">Carica</button>
     </div>
   </div>
@@ -216,10 +278,8 @@
 
 <script>
   const SHEET_ID = '1kH-ODNxH9DjUZJ__SoWmtW0_2VsPCQt5yXURjwSHRUE';
-
-  // Colonne fisse per disponibilità e quota minima (indice 0-based: D=3, E=4)
-  const COL_QTY = 3;   // colonna D — quantità disponibile
-  const COL_MIN = 4;   // colonna E — quota minima (nascosta dalla vista)
+  const COL_QTY = 3; // colonna D (0-based)
+  const COL_MIN = 4; // colonna E (0-based) — nascosta
 
   let allData = [], headers = [], currentView = 'table', sortCol = -1, sortAsc = true;
 
@@ -230,7 +290,6 @@
     return hdrs.findIndex(h => kw.some(k => h.toLowerCase().includes(k)));
   }
 
-  // Determina lo stato della riga in base a D vs E
   function rowStatus(r) {
     const qty = parseInt(r[COL_QTY]);
     const min = parseInt(r[COL_MIN]);
@@ -240,30 +299,24 @@
   }
 
   function badge(status) {
-    const map = {
-      ok:  ['Disponibile', 'badge-avail'],
-      low: ['Scorta bassa', 'badge-low'],
-      out: ['Esaurito', 'badge-out'],
-    };
+    const map = { ok: ['Disponibile','badge-avail'], low: ['Scorta bassa','badge-low'], out: ['Esaurito','badge-out'] };
     const [label, cls] = map[status] || map.ok;
     return `<span class="badge ${cls}">${label}</span>`;
   }
 
   function isUrl(str) {
-    try { const u = new URL(str); return u.protocol === 'http:' || u.protocol === 'https:'; }
-    catch { return false; }
+    try { const u = new URL(str); return u.protocol==='http:'||u.protocol==='https:'; } catch { return false; }
   }
 
   function updateStats() {
     document.getElementById('s-total').textContent = allData.length;
-    document.getElementById('s-avail').textContent = allData.filter(r => rowStatus(r) === 'ok').length;
-    document.getElementById('s-low').textContent   = allData.filter(r => rowStatus(r) === 'low').length;
-    document.getElementById('s-out').textContent   = allData.filter(r => rowStatus(r) === 'out').length;
+    document.getElementById('s-avail').textContent = allData.filter(r => rowStatus(r)==='ok').length;
+    document.getElementById('s-low').textContent   = allData.filter(r => rowStatus(r)==='low').length;
+    document.getElementById('s-out').textContent   = allData.filter(r => rowStatus(r)==='out').length;
   }
 
-  // Indici di colonne da mostrare (esclude COL_MIN e colonna immagine)
   function visibleCols(ic) {
-    return headers.map((_, i) => i).filter(i => i !== COL_MIN && i !== ic);
+    return headers.map((_,i)=>i).filter(i => i!==COL_MIN && i!==ic);
   }
 
   function populateFilters() {
@@ -274,14 +327,15 @@
     fc.innerHTML = '<option value="">Filtra per…</option>';
     vis.forEach(i => {
       const o = document.createElement('option');
-      o.value = i; o.textContent = headers[i]; fc.appendChild(o);
+      o.value = i; o.textContent = i===COL_QTY ? 'Disponibilità' : headers[i];
+      fc.appendChild(o);
     });
     fc.onchange = () => {
       const ci = parseInt(fc.value);
       fv.innerHTML = '<option value="">Tutti</option>';
       if (!isNaN(ci)) {
-        [...new Set(allData.map(r => r[ci]).filter(Boolean))].sort()
-          .forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; fv.appendChild(o); });
+        [...new Set(allData.map(r=>r[ci]).filter(Boolean))].sort()
+          .forEach(v => { const o=document.createElement('option'); o.value=v; o.textContent=v; fv.appendChild(o); });
       }
       render();
     };
@@ -293,16 +347,16 @@
     const fc = parseInt(document.getElementById('filter-col').value);
     const fv = document.getElementById('filter-val').value;
     let data = allData.filter(r => {
-      const mq = !q  || r.some(c => c.toLowerCase().includes(q));
-      const mf = !fv || (!isNaN(fc) && r[fc] === fv);
+      const mq = !q  || r.some(c=>c.toLowerCase().includes(q));
+      const mf = !fv || (!isNaN(fc) && r[fc]===fv);
       return mq && mf;
     });
     if (sortCol >= 0) {
-      data.sort((a, b) => {
-        const av = a[sortCol]||'', bv = b[sortCol]||'';
-        const an = parseFloat(av), bn = parseFloat(bv);
-        if (!isNaN(an) && !isNaN(bn)) return sortAsc ? an-bn : bn-an;
-        return sortAsc ? av.localeCompare(bv,'it') : bv.localeCompare(av,'it');
+      data.sort((a,b) => {
+        const av=a[sortCol]||'', bv=b[sortCol]||'';
+        const an=parseFloat(av), bn=parseFloat(bv);
+        if (!isNaN(an)&&!isNaN(bn)) return sortAsc?an-bn:bn-an;
+        return sortAsc?av.localeCompare(bv,'it'):bv.localeCompare(av,'it');
       });
     }
     return data;
@@ -320,37 +374,37 @@
     let h = `<div class="table-wrap"><table><thead><tr>`;
     if (ic >= 0) h += `<th style="width:56px;cursor:default;"></th>`;
     vis.forEach(i => {
-      const cls = sortCol === i ? 'sorted' : '';
-      const arr = sortCol === i ? (sortAsc ? '↑' : '↓') : '↕';
-      // Colonna D (quantità): mostra "Disponibilità" invece del nome originale
-      const label = i === COL_QTY ? 'Disponibilità' : headers[i];
+      const cls = sortCol===i ? 'sorted' : '';
+      const arr = sortCol===i ? (sortAsc?'↑':'↓') : '↕';
+      const label = i===COL_QTY ? 'Disponibilità' : headers[i];
       h += `<th class="${cls}" onclick="sortBy(${i})">${label} <span class="sort-arr">${arr}</span></th>`;
     });
     h += `</tr></thead><tbody>`;
 
     data.forEach(r => {
       const status = rowStatus(r);
-      const rowCls = status === 'out' ? 'row-out' : status === 'low' ? 'row-low' : '';
+      const rowCls = status==='out' ? 'row-out' : status==='low' ? 'row-low' : '';
       h += `<tr class="${rowCls}">`;
 
-      // Thumbnail copertina
+      // Thumbnail (desktop) / immagine top (mobile)
       if (ic >= 0) {
         const url = r[ic] || '';
         if (url && isUrl(url)) {
-          h += `<td style="padding:6px 8px 6px 16px;"><img src="${url}" class="thumb" loading="lazy" onerror="this.outerHTML='<div class=\\'thumb-placeholder\\'>📖</div>'"></td>`;
+          h += `<td class="td-cover" style="padding:6px 8px 6px 16px;"><img src="${url}" class="thumb" loading="lazy" onerror="this.outerHTML='<div class=\\'thumb-placeholder\\'>📖</div>'"></td>`;
         } else {
-          h += `<td style="padding:6px 8px 6px 16px;"><div class="thumb-placeholder">📖</div></td>`;
+          h += `<td class="td-cover" style="padding:6px 8px 6px 16px;"><div class="thumb-placeholder">📖</div></td>`;
         }
       }
 
       vis.forEach(i => {
         const c = r[i] || '';
+        const label = i===COL_QTY ? 'Disponibilità' : headers[i];
         if (i === COL_QTY) {
-          h += `<td>${badge(status)} <span style="color:var(--text-faint);font-size:12px;margin-left:4px;">${c}</span></td>`;
+          h += `<td data-label="${label}">${badge(status)} <span style="color:var(--text-faint);font-size:12px;margin-left:4px;">${c}</span></td>`;
         } else if (i === 0) {
-          h += `<td class="td-main">${c}</td>`;
+          h += `<td data-label="${label}" class="td-main">${c}</td>`;
         } else {
-          h += `<td class="td-muted">${c}</td>`;
+          h += `<td data-label="${label}" class="td-muted">${c}</td>`;
         }
       });
       h += '</tr>';
@@ -372,12 +426,11 @@
     let h = '<div class="cards-grid">';
     data.forEach(r => {
       const status  = rowStatus(r);
-      const cardCls = status === 'out' ? 'card card-out' : status === 'low' ? 'card card-low' : 'card';
-      const imgUrl  = ic >= 0 ? (r[ic] || '') : '';
+      const cardCls = status==='out' ? 'card card-out' : status==='low' ? 'card card-low' : 'card';
+      const imgUrl  = ic >= 0 ? (r[ic]||'') : '';
       const author  = ac >= 0 ? r[ac] : '';
-      const attrs   = vis
-        .filter(i => i !== 0 && i !== ac && i !== COL_QTY && r[i])
-        .map(i => `<span style="display:block;">${headers[i]}: ${r[i]}</span>`).join('');
+      const attrs   = vis.filter(i=>i!==0&&i!==ac&&i!==COL_QTY&&r[i])
+        .map(i=>`<span style="display:block;">${headers[i]}: ${r[i]}</span>`).join('');
 
       const coverHtml = (imgUrl && isUrl(imgUrl))
         ? `<img src="${imgUrl}" class="card-cover" alt="${(r[0]||'').replace(/"/g,'&quot;')}" loading="lazy" onerror="this.outerHTML='<div class=\\'card-cover-placeholder\\'>📖</div>'">`
@@ -386,12 +439,12 @@
       h += `<div class="${cardCls}">
         ${coverHtml}
         <div class="card-body">
-          <div class="card-title">${r[0] || '—'}</div>
+          <div class="card-title">${r[0]||'—'}</div>
           ${author ? `<div class="card-author">${author}</div>` : ''}
           ${attrs  ? `<div class="card-attrs">${attrs}</div>` : ''}
           <div class="card-foot">
             ${badge(status)}
-            <span class="card-qty">${r[COL_QTY] !== undefined ? r[COL_QTY] : '—'}</span>
+            <span class="card-qty">${r[COL_QTY]!==undefined?r[COL_QTY]:'—'}</span>
           </div>
         </div>
       </div>`;
@@ -403,53 +456,45 @@
   function render() {
     const data = getFiltered();
     document.getElementById('result-count').textContent = `${data.length} risultati`;
-    currentView === 'table' ? renderTable(data) : renderCards(data);
+    currentView==='table' ? renderTable(data) : renderCards(data);
   }
 
-  function sortBy(i) {
-    sortAsc = sortCol === i ? !sortAsc : true;
-    sortCol = i;
-    render();
-  }
+  function sortBy(i) { sortAsc = sortCol===i ? !sortAsc : true; sortCol=i; render(); }
 
   function setView(v) {
     currentView = v;
-    document.getElementById('btn-table').classList.toggle('active', v === 'table');
-    document.getElementById('btn-cards').classList.toggle('active', v === 'cards');
+    document.getElementById('btn-table').classList.toggle('active', v==='table');
+    document.getElementById('btn-cards').classList.toggle('active', v==='cards');
     render();
   }
 
   function parseCSV(text) {
-    const rows = [];
-    let inQ = false, cur = '', row = [];
-    for (let i = 0; i < text.length; i++) {
-      const c = text[i];
-      if (c === '"') { inQ = !inQ; }
-      else if (c === ',' && !inQ) { row.push(cur.trim()); cur = ''; }
-      else if ((c === '\n' || c === '\r') && !inQ) {
-        if (text[i+1] === '\n') i++;
-        row.push(cur.trim()); cur = '';
-        if (row.some(x => x)) rows.push(row);
-        row = [];
-      } else { cur += c; }
+    const rows=[]; let inQ=false, cur='', row=[];
+    for (let i=0;i<text.length;i++) {
+      const c=text[i];
+      if (c==='"') { inQ=!inQ; }
+      else if (c===','&&!inQ) { row.push(cur.trim()); cur=''; }
+      else if ((c==='\n'||c==='\r')&&!inQ) {
+        if (text[i+1]==='\n') i++;
+        row.push(cur.trim()); cur='';
+        if (row.some(x=>x)) rows.push(row); row=[];
+      } else { cur+=c; }
     }
-    if (cur || row.length) { row.push(cur.trim()); if (row.some(x=>x)) rows.push(row); }
+    if (cur||row.length) { row.push(cur.trim()); if (row.some(x=>x)) rows.push(row); }
     return rows;
   }
 
   function processCSV(text) {
     const rows = parseCSV(text);
     if (rows.length < 2) { showSetup(); return; }
-    headers = rows[0].map(h => h.replace(/^"|"$/g, ''));
-    allData = rows.slice(1).filter(r => r.some(c => c));
+    headers = rows[0].map(h=>h.replace(/^"|"$/g,''));
+    allData = rows.slice(1).filter(r=>r.some(c=>c));
     document.getElementById('setup-banner').style.display = 'none';
     const ic = detectCol(headers, imgKw);
-    const hint = ic >= 0 ? ' · copertine attive' : '';
+    const hint = ic>=0 ? ' · copertine attive' : '';
     document.getElementById('last-update').textContent =
-      `${allData.length} titoli${hint} · Aggiornato il ${new Date().toLocaleDateString('it-IT', { day:'2-digit', month:'long', year:'numeric' })}`;
-    updateStats();
-    populateFilters();
-    render();
+      `${allData.length} titoli${hint} · Aggiornato il ${new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'})}`;
+    updateStats(); populateFilters(); render();
   }
 
   function showSetup() {
@@ -464,10 +509,7 @@
       `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`,
     ];
     for (const url of urls) {
-      try {
-        const r = await fetch(url);
-        if (r.ok) { const t = await r.text(); if (t && t.length > 20) return t; }
-      } catch(e) {}
+      try { const r=await fetch(url); if (r.ok){const t=await r.text(); if(t&&t.length>20) return t;} } catch(e){}
     }
     return null;
   }
@@ -475,11 +517,8 @@
   async function loadCustom() {
     const url = document.getElementById('custom-url').value.trim();
     if (!url) return;
-    try {
-      const r = await fetch(url);
-      if (r.ok) processCSV(await r.text());
-      else alert('Impossibile caricare il file. Verifica il link.');
-    } catch(e) { alert('Errore: ' + e.message); }
+    try { const r=await fetch(url); if(r.ok) processCSV(await r.text()); else alert('Impossibile caricare il file.'); }
+    catch(e) { alert('Errore: '+e.message); }
   }
 
   async function reload() {
@@ -487,17 +526,12 @@
     icon.className = 'spin';
     const csv = await fetchSheet();
     icon.className = '';
-    if (csv) processCSV(csv);
-    else showSetup();
+    if (csv) processCSV(csv); else showSetup();
   }
 
   document.getElementById('search').addEventListener('input', render);
 
-  (async () => {
-    const csv = await fetchSheet();
-    if (csv) processCSV(csv);
-    else showSetup();
-  })();
+  (async () => { const csv=await fetchSheet(); if(csv) processCSV(csv); else showSetup(); })();
 </script>
 </body>
 </html>
