@@ -1,4 +1,4 @@
-const CACHE = 'cas-inventario-v1';
+const CACHE = 'cas-inventario-v2';
 const ASSETS = [
   '/Inventario/',
   '/Inventario/index.html',
