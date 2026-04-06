@@ -42,6 +42,7 @@
       align-items: center;
       gap: 1.25rem;
     }
+    .header-inner { max-width: 70%; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 1.25rem; }
     .header-logo {
       width: 52px;
       height: 52px;
@@ -66,6 +67,11 @@
     .form-section {
       background: var(--cas-blue-dark);
       padding: 1.25rem 2.5rem;
+      display: flex;
+      justify-content: center;
+    }
+    .form-inner {
+      width: 70%;
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
@@ -239,8 +245,10 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       header { padding: 1rem; }
+      .header-inner { max-width: 100%; }
       .header-title { font-size: 17px; }
-      .form-section { padding: 1rem; }
+      .form-section { padding: 0.75rem 1rem; }
+      .form-inner { width: 100%; }
       .toolbar { padding: 0.75rem 1rem; }
       .legend { display: none; }
       main { padding: 1rem 1rem 2.5rem; }
@@ -266,28 +274,32 @@
 <div class="toast" id="toast"></div>
 
 <header>
-  <img class="header-logo" id="header-logo" src="" alt="CAS Pordenone">
-  <div>
-    <div class="header-title">Inventario CAS Pordenone</div>
-    <div class="header-sub" id="last-update">Caricamento in corso…</div>
+  <div class="header-inner">
+    <img class="header-logo" id="header-logo" src="" alt="CAS Pordenone">
+    <div>
+      <div class="header-title">Inventario CAS Pordenone</div>
+      <div class="header-sub" id="last-update">Caricamento in corso…</div>
+    </div>
   </div>
 </header>
 
 <!-- FORM AGGIORNAMENTO -->
 <div class="form-section">
-  <div class="form-group">
-    <label>Documento</label>
-    <select id="doc-select">
-      <option value="">— seleziona —</option>
-    </select>
-  </div>
-  <div class="form-group" style="max-width:140px;">
-    <label>Quantità</label>
-    <input type="number" id="qty-input" min="1" placeholder="es. 5">
-  </div>
-  <div class="form-actions">
-    <button class="btn-add"    id="btn-add"    onclick="updateQty('add')"    disabled>+ Aggiungi</button>
-    <button class="btn-remove" id="btn-remove" onclick="updateQty('remove')" disabled>− Rimuovi</button>
+  <div class="form-inner">
+    <div class="form-group">
+      <label>Documento</label>
+      <select id="doc-select">
+        <option value="">— seleziona —</option>
+      </select>
+    </div>
+    <div class="form-group" style="max-width:140px;">
+      <label>Quantità</label>
+      <input type="number" id="qty-input" min="1" placeholder="es. 5">
+    </div>
+    <div class="form-actions">
+      <button class="btn-add"    id="btn-add"    onclick="updateQty('add')"    disabled>+ Aggiungi</button>
+      <button class="btn-remove" id="btn-remove" onclick="updateQty('remove')" disabled>− Rimuovi</button>
+    </div>
   </div>
 </div>
 
