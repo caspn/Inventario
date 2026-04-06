@@ -410,18 +410,11 @@
     document.getElementById('btn-remove').disabled = true;
 
     try {
-      const res = await fetch(SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ row: sheetRow, col: COL_QTY + 1, value: newQty })
-      });
-      if (res.ok) {
-        row[COL_QTY] = String(newQty);
-        showToast(`Aggiornato: ${row[COL_NAME]} → ${newQty} copie`, 'success');
-        render();
-      } else {
-        showToast('Errore durante l\'aggiornamento', 'error');
-      }
+      const url = `${SCRIPT_URL}?row=${sheetRow}&col=${COL_QTY + 1}&value=${newQty}`;
+      await fetch(url, { method: 'GET', mode: 'no-cors' });
+      row[COL_QTY] = String(newQty);
+      showToast(`Aggiornato: ${row[COL_NAME]} → ${newQty} copie`, 'success');
+      render();
     } catch(e) {
       showToast('Errore di rete: ' + e.message, 'error');
     } finally {
