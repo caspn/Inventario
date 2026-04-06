@@ -99,106 +99,38 @@
     .thumb:hover { opacity: 0.8; }
     .thumb-placeholder { width: 36px; height: 50px; border-radius: 4px; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-faint); font-size: 18px; }
 
-    /* ── MOBILE LIST: 2 colonne ── */
+    /* ── MOBILE LIST ── */
     .mobile-list { display: none; flex-direction: column; gap: 10px; }
 
-    .m-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      display: flex;
-      flex-direction: row;
-      align-items: stretch;
-    }
+    .m-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: row; align-items: stretch; }
     .m-card.m-low { border: 2px solid var(--row-low); background: var(--row-low-bg); }
     .m-card.m-out { border: 2px solid var(--row-out); background: var(--row-out-bg); }
 
-    /* colonna sinistra: miniatura */
-    .m-thumb-wrap {
-      flex-shrink: 0;
-      width: 80px;
-      background: var(--surface2);
-      border-right: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-    .m-thumb-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top;
-      display: block;
-      transition: opacity 0.15s;
-    }
+    .m-thumb-wrap { flex-shrink: 0; width: 80px; background: var(--surface2); border-right: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; overflow: hidden; }
+    .m-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: opacity 0.15s; }
     .m-thumb-wrap:hover img { opacity: 0.85; }
-    .m-thumb-wrap .zoom-icon {
-      position: absolute;
-      bottom: 6px;
-      right: 6px;
-      background: rgba(0,0,0,0.45);
-      border-radius: 4px;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.15s;
-    }
-    .m-thumb-wrap:hover .zoom-icon { opacity: 1; }
-    .m-thumb-wrap .zoom-icon svg { width: 11px; height: 11px; }
+    .m-zoom { position: absolute; bottom: 6px; right: 6px; background: rgba(0,0,0,0.45); border-radius: 4px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.15s; }
+    .m-thumb-wrap:hover .m-zoom { opacity: 1; }
+    .m-zoom svg { width: 11px; height: 11px; }
     .m-no-img { font-size: 28px; color: var(--text-faint); }
 
-    /* colonna destra: dati */
-    .m-body { flex: 1; padding: 10px 13px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-    .m-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 400; line-height: 1.3; color: var(--text); }
+    .m-body { flex: 1; padding: 10px 13px; display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+
+    /* tipo documento (parte prima del trattino) */
+    .m-tipo { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-faint); line-height: 1.2; }
+    /* titolo (parte dopo il trattino) */
+    .m-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 400; line-height: 1.35; color: var(--text); }
+    /* righe codice / disponibilità */
     .m-row { display: flex; flex-direction: column; }
     .m-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); font-weight: 500; line-height: 1.2; }
     .m-value { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
-    .m-status { margin-top: 4px; }
+    .m-status { margin-top: 2px; }
 
     /* ── LIGHTBOX ── */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-    }
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; padding: 1.5rem; }
     .lightbox.open { display: flex; }
-    .lightbox img {
-      max-width: 100%;
-      max-height: 90vh;
-      object-fit: contain;
-      border-radius: var(--radius);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
-    .lightbox-close {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(255,255,255,0.15);
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: #fff;
-      font-size: 20px;
-      line-height: 1;
-      transition: background 0.15s;
-    }
+    .lightbox img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .lightbox-close { position: fixed; top: 1rem; right: 1rem; background: rgba(255,255,255,0.15); border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; font-size: 20px; line-height: 1; transition: background 0.15s; }
     .lightbox-close:hover { background: rgba(255,255,255,0.28); }
 
     /* ── CARDS VIEW ── */
@@ -241,11 +173,8 @@
       .toolbar { padding: 0.75rem 1rem; }
       .legend { display: none; }
       main { padding: 1rem 1rem 2.5rem; }
-
-      /* su mobile: nascondi tabella desktop, mostra mobile-list */
       .table-wrap { display: none; }
       .mobile-list { display: flex; }
-
       .cards-grid { grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 10px; }
     }
   </style>
@@ -278,7 +207,7 @@
 <div class="toolbar">
   <div class="search-wrap">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#1A1814" stroke-width="1.5"/><path d="M10.5 10.5L14 14" stroke="#1A1814" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <input type="text" id="search" placeholder="Cerca titolo, autore…">
+    <input type="text" id="search" placeholder="Cerca titolo, codice…">
   </div>
   <select id="filter-col"><option value="">Filtra per…</option></select>
   <select id="filter-val"><option value="">Tutti</option></select>
@@ -309,7 +238,7 @@
       <li>Salva e clicca <strong>Aggiorna</strong> in alto a destra</li>
     </ol>
     <div class="hint-box">
-      <strong>Per le copertine:</strong> aggiungi una colonna chiamata <strong>Copertina</strong> (o <em>Immagine / Cover</em>) con l'URL diretto per ogni libro.
+      <strong>Per le copertine:</strong> aggiungi una colonna <strong>Immagine</strong> (colonna A) con l'URL diretto per ogni documento.
     </div>
     <p>Oppure carica un file CSV (File → Scarica → Valori separati da virgola):</p>
     <div class="custom-url-row">
@@ -328,20 +257,20 @@
 
 <script>
   const SHEET_ID = '1kH-ODNxH9DjUZJ__SoWmtW0_2VsPCQt5yXURjwSHRUE';
-  const COL_QTY = 3; // D (0-based)
-  const COL_MIN = 4; // E (0-based) — usata per calcoli, non mostrata
-  // Colonne visibili su mobile: A(0), B(1), C(2), D(3) — E nascosta
-  const MOBILE_COLS = [0, 1, 2, 3];
+
+  // Indici fissi (0-based)
+  const COL_IMG  = 0; // A — immagine
+  const COL_NAME = 1; // B — nome documento (es. "OPUSCOLO - Titolo...")
+  const COL_CODE = 2; // C — codice
+  const COL_QTY  = 3; // D — quantità disponibile
+  const COL_MIN  = 4; // E — quota minima (solo calcoli, non mostrata)
+
+  // Colonne mostrate su mobile (A esclusa perché è l'immagine, E nascosta)
+  const MOBILE_DATA_COLS = [COL_NAME, COL_CODE, COL_QTY];
 
   let allData = [], headers = [], currentView = 'table', sortCol = -1, sortAsc = true;
 
-  const imgKw  = ['copertina','immagine','cover','image','foto','img','photo'];
-  const authKw = ['autore','author','scrittore'];
-
-  function detectCol(hdrs, kw) {
-    return hdrs.findIndex(h => kw.some(k => h.toLowerCase().includes(k)));
-  }
-
+  /* ── Utilità ── */
   function rowStatus(r) {
     const qty = parseInt(r[COL_QTY]);
     const min = parseInt(r[COL_MIN]);
@@ -351,34 +280,27 @@
   }
 
   function badge(status) {
-    const map = { ok: ['Disponibile','badge-avail'], low: ['Scorta bassa','badge-low'], out: ['Esaurito','badge-out'] };
-    const [label, cls] = map[status] || map.ok;
+    const map = { ok:['Disponibile','badge-avail'], low:['Scorta bassa','badge-low'], out:['Esaurito','badge-out'] };
+    const [label, cls] = map[status]||map.ok;
     return `<span class="badge ${cls}">${label}</span>`;
   }
 
   function isUrl(str) {
-    try { const u = new URL(str); return u.protocol==='http:'||u.protocol==='https:'; } catch { return false; }
+    try { const u=new URL(str); return u.protocol==='http:'||u.protocol==='https:'; } catch { return false; }
   }
 
-  // Colonne visibili su desktop (esclude COL_MIN e colonna immagine)
-  function visibleCols(ic) {
-    return headers.map((_,i)=>i).filter(i => i!==COL_MIN && i!==ic);
+  // Divide "TIPO - Titolo del documento" → { tipo, titolo }
+  // Se non c'è trattino, tipo = '' e titolo = intera stringa
+  function splitName(val) {
+    const dash = val.indexOf(' - ');
+    if (dash === -1) return { tipo: '', titolo: val.trim() };
+    return {
+      tipo:   val.slice(0, dash).trim().toUpperCase(),
+      titolo: val.slice(dash + 3).trim()
+    };
   }
 
-  function openLightbox(url) {
-    document.getElementById('lightbox-img').src = url;
-    document.getElementById('lightbox').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
-    document.getElementById('lightbox-img').src = '';
-    document.body.style.overflow = '';
-  }
-
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
+  /* ── Statistiche ── */
   function updateStats() {
     document.getElementById('s-total').textContent = allData.length;
     document.getElementById('s-avail').textContent = allData.filter(r=>rowStatus(r)==='ok').length;
@@ -386,15 +308,17 @@
     document.getElementById('s-out').textContent   = allData.filter(r=>rowStatus(r)==='out').length;
   }
 
+  /* ── Filtri ── */
   function populateFilters() {
-    const ic  = detectCol(headers, imgKw);
-    const vis = visibleCols(ic);
-    const fc  = document.getElementById('filter-col');
-    const fv  = document.getElementById('filter-val');
+    // Colonne visibili su desktop per il filtro (escludi img e COL_MIN)
+    const visCols = headers.map((_,i)=>i).filter(i=>i!==COL_IMG && i!==COL_MIN);
+    const fc = document.getElementById('filter-col');
+    const fv = document.getElementById('filter-val');
     fc.innerHTML = '<option value="">Filtra per…</option>';
-    vis.forEach(i => {
+    visCols.forEach(i => {
       const o = document.createElement('option');
-      o.value = i; o.textContent = i===COL_QTY ? 'Disponibilità' : headers[i];
+      o.value = i;
+      o.textContent = i===COL_QTY ? 'Disponibilità' : headers[i];
       fc.appendChild(o);
     });
     fc.onchange = () => {
@@ -429,22 +353,34 @@
     return data;
   }
 
+  /* ── Lightbox ── */
+  function openLightbox(url) {
+    document.getElementById('lightbox-img').src = url;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightbox-img').src = '';
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key==='Escape') closeLightbox(); });
+
+  /* ── Render tabella desktop ── */
   function renderTable(data) {
-    const ic  = detectCol(headers, imgKw);
-    const vis = visibleCols(ic);
+    const visCols = headers.map((_,i)=>i).filter(i=>i!==COL_IMG && i!==COL_MIN);
 
     if (data.length === 0) {
       document.getElementById('content').innerHTML = `<div class="empty-state"><p>Nessun risultato trovato</p></div>`;
       return;
     }
 
-    // ── DESKTOP TABLE ──
     let t = `<div class="table-wrap"><table><thead><tr>`;
-    if (ic >= 0) t += `<th style="width:56px;cursor:default;"></th>`;
-    vis.forEach(i => {
-      const cls   = sortCol===i ? 'sorted' : '';
-      const arr   = sortCol===i ? (sortAsc?'↑':'↓') : '↕';
-      const label = i===COL_QTY ? 'Disponibilità' : headers[i];
+    t += `<th style="width:56px;cursor:default;"></th>`; // colonna immagine
+    visCols.forEach(i => {
+      const cls   = sortCol===i?'sorted':'';
+      const arr   = sortCol===i?(sortAsc?'↑':'↓'):'↕';
+      const label = i===COL_QTY?'Disponibilità':headers[i];
       t += `<th class="${cls}" onclick="sortBy(${i})">${label} <span class="sort-arr">${arr}</span></th>`;
     });
     t += `</tr></thead><tbody>`;
@@ -453,102 +389,108 @@
       const status = rowStatus(r);
       const rowCls = status==='out'?'row-out':status==='low'?'row-low':'';
       t += `<tr class="${rowCls}">`;
-      if (ic >= 0) {
-        const url = r[ic]||'';
-        if (url && isUrl(url)) {
-          t += `<td style="padding:6px 8px 6px 16px;"><img src="${url}" class="thumb" loading="lazy" onclick="openLightbox('${url.replace(/'/g,"\\'")}')" onerror="this.outerHTML='<div class=\\'thumb-placeholder\\'>📖</div>'"></td>`;
-        } else {
-          t += `<td style="padding:6px 8px 6px 16px;"><div class="thumb-placeholder">📖</div></td>`;
-        }
+
+      // Thumbnail
+      const imgUrl = r[COL_IMG]||'';
+      if (imgUrl && isUrl(imgUrl)) {
+        t += `<td style="padding:6px 8px 6px 16px;"><img src="${imgUrl}" class="thumb" loading="lazy" onclick="openLightbox('${imgUrl.replace(/'/g,"\\'")}')"></td>`;
+      } else {
+        t += `<td style="padding:6px 8px 6px 16px;"><div class="thumb-placeholder">📄</div></td>`;
       }
-      vis.forEach(i => {
+
+      visCols.forEach(i => {
         const c = r[i]||'';
-        const label = i===COL_QTY?'Disponibilità':headers[i];
         if (i===COL_QTY) {
-          t += `<td data-label="${label}">${badge(status)} <span style="color:var(--text-faint);font-size:12px;margin-left:4px;">${c}</span></td>`;
-        } else if (i===0) {
-          t += `<td data-label="${label}" class="td-main">${c}</td>`;
+          t += `<td>${badge(status)} <span style="color:var(--text-faint);font-size:12px;margin-left:4px;">${c}</span></td>`;
+        } else if (i===COL_NAME) {
+          t += `<td class="td-main">${c}</td>`;
         } else {
-          t += `<td data-label="${label}" class="td-muted">${c}</td>`;
+          t += `<td class="td-muted">${c}</td>`;
         }
       });
       t += '</tr>';
     });
     t += '</tbody></table></div>';
 
-    // ── MOBILE LIST: 2 colonne ──
-    const ic2 = ic; // alias per leggibilità
+    /* ── Render mobile list ── */
     let m = `<div class="mobile-list">`;
     data.forEach(r => {
       const status  = rowStatus(r);
       const cardCls = status==='out'?'m-card m-out':status==='low'?'m-card m-low':'m-card';
-      const imgUrl  = ic2>=0 ? (r[ic2]||'') : '';
+      const imgUrl  = r[COL_IMG]||'';
+      const rawName = r[COL_NAME]||'';
+      const code    = r[COL_CODE]||'';
+      const qty     = r[COL_QTY]||'';
+      const { tipo, titolo } = splitName(rawName);
 
-      // Thumb colonna sinistra
+      // Thumbnail sinistra
       let thumbHtml = '';
       if (imgUrl && isUrl(imgUrl)) {
-        thumbHtml = `<div class="m-thumb-wrap" onclick="openLightbox('${imgUrl.replace(/'/g,"\\'")}')">
-          <img src="${imgUrl}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=\\'m-no-img\\'>📖</span>'">
-          <span class="zoom-icon"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="1.5"><circle cx="5" cy="5" r="3.5"/><path d="M8 8l2.5 2.5" stroke-linecap="round"/><path d="M3.5 5h3M5 3.5v3" stroke-linecap="round"/></svg></span>
+        const esc = imgUrl.replace(/'/g,"\\'");
+        thumbHtml = `<div class="m-thumb-wrap" onclick="openLightbox('${esc}')">
+          <img src="${imgUrl}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=\\'m-no-img\\'>📄</span>'">
+          <span class="m-zoom"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="1.5"><circle cx="5" cy="5" r="3.5"/><path d="M8 8l2.5 2.5" stroke-linecap="round"/><path d="M3.5 5h3M5 3.5v3" stroke-linecap="round"/></svg></span>
         </div>`;
       } else {
-        thumbHtml = `<div class="m-thumb-wrap"><span class="m-no-img">📖</span></div>`;
+        thumbHtml = `<div class="m-thumb-wrap"><span class="m-no-img">📄</span></div>`;
       }
 
-      // Dati: solo colonne A-D visibili (escludi immagine e COL_MIN)
-      const mobileCols = MOBILE_COLS.filter(i => i!==ic2);
-      let dataHtml = '';
-      mobileCols.forEach(i => {
-        const val = r[i]||'';
-        if (!val && i!==0) return;
-        const label = i===COL_QTY ? 'Disponibilità' : headers[i]||'';
-        if (i===0) {
-          dataHtml += `<div class="m-title">${val||'—'}</div>`;
-        } else if (i===COL_QTY) {
-          dataHtml += `<div class="m-status">${badge(status)} <span style="font-size:12px;color:var(--text-faint);margin-left:4px;">${val}</span></div>`;
-        } else {
-          dataHtml += `<div class="m-row"><span class="m-label">${label}</span><span class="m-value">${val}</span></div>`;
-        }
-      });
+      // Corpo destra
+      let bodyHtml = '';
 
-      m += `<div class="${cardCls}">${thumbHtml}<div class="m-body">${dataHtml}</div></div>`;
+      // Tipo (parte prima del trattino) — solo se presente
+      if (tipo) bodyHtml += `<div class="m-tipo">${tipo}</div>`;
+
+      // Titolo (parte dopo il trattino, o intera stringa)
+      bodyHtml += `<div class="m-title">${titolo||'—'}</div>`;
+
+      // Codice
+      if (code) {
+        bodyHtml += `<div class="m-row">
+          <span class="m-label">Codice</span>
+          <span class="m-value">${code}</span>
+        </div>`;
+      }
+
+      // Disponibilità
+      bodyHtml += `<div class="m-status">${badge(status)} <span style="font-size:12px;color:var(--text-faint);margin-left:4px;">${qty}</span></div>`;
+
+      m += `<div class="${cardCls}">${thumbHtml}<div class="m-body">${bodyHtml}</div></div>`;
     });
     m += '</div>';
 
     document.getElementById('content').innerHTML = t + m;
   }
 
+  /* ── Render schede ── */
   function renderCards(data) {
     if (data.length === 0) {
       document.getElementById('content').innerHTML = `<div class="empty-state"><p>Nessun risultato trovato</p></div>`;
       return;
     }
-    const ic  = detectCol(headers, imgKw);
-    const ac  = detectCol(headers, authKw)>=0 ? detectCol(headers, authKw) : (headers.length>1?1:-1);
-    const vis = visibleCols(ic);
-
     let h = '<div class="cards-grid">';
     data.forEach(r => {
       const status  = rowStatus(r);
       const cardCls = status==='out'?'card card-out':status==='low'?'card card-low':'card';
-      const imgUrl  = ic>=0 ? (r[ic]||'') : '';
-      const author  = ac>=0 ? r[ac] : '';
-      const attrs   = vis.filter(i=>i!==0&&i!==ac&&i!==COL_QTY&&r[i])
-        .map(i=>`<span style="display:block;">${headers[i]}: ${r[i]}</span>`).join('');
+      const imgUrl  = r[COL_IMG]||'';
+      const rawName = r[COL_NAME]||'';
+      const code    = r[COL_CODE]||'';
+      const qty     = r[COL_QTY]||'';
+      const { tipo, titolo } = splitName(rawName);
 
       const coverHtml = (imgUrl && isUrl(imgUrl))
-        ? `<img src="${imgUrl}" class="card-cover" alt="${(r[0]||'').replace(/"/g,'&quot;')}" loading="lazy" onclick="openLightbox('${imgUrl.replace(/'/g,"\\'")}')}" onerror="this.outerHTML='<div class=\\'card-cover-placeholder\\'>📖</div>'">`
-        : `<div class="card-cover-placeholder">📖</div>`;
+        ? `<img src="${imgUrl}" class="card-cover" alt="" loading="lazy" onclick="openLightbox('${imgUrl.replace(/'/g,"\\'")}')}"  onerror="this.outerHTML='<div class=\\'card-cover-placeholder\\'>📄</div>'">`
+        : `<div class="card-cover-placeholder">📄</div>`;
 
       h += `<div class="${cardCls}">
         ${coverHtml}
         <div class="card-body">
-          <div class="card-title">${r[0]||'—'}</div>
-          ${author?`<div class="card-author">${author}</div>`:''}
-          ${attrs?`<div class="card-attrs">${attrs}</div>`:''}
+          ${tipo?`<div style="font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-faint);margin-bottom:2px;">${tipo}</div>`:''}
+          <div class="card-title">${titolo||'—'}</div>
+          ${code?`<div class="card-author">Codice: ${code}</div>`:''}
           <div class="card-foot">
             ${badge(status)}
-            <span class="card-qty">${r[COL_QTY]!==undefined?r[COL_QTY]:'—'}</span>
+            <span class="card-qty">${qty||'—'}</span>
           </div>
         </div>
       </div>`;
@@ -557,6 +499,7 @@
     document.getElementById('content').innerHTML = h;
   }
 
+  /* ── Orchestrazione ── */
   function render() {
     const data = getFiltered();
     document.getElementById('result-count').textContent = `${data.length} risultati`;
@@ -572,13 +515,14 @@
     render();
   }
 
+  /* ── CSV parsing ── */
   function parseCSV(text) {
     const rows=[]; let inQ=false, cur='', row=[];
     for (let i=0;i<text.length;i++) {
       const c=text[i];
-      if (c==='"'){inQ=!inQ;}
-      else if (c===','&&!inQ){row.push(cur.trim());cur='';}
-      else if ((c==='\n'||c==='\r')&&!inQ){
+      if(c==='"'){inQ=!inQ;}
+      else if(c===','&&!inQ){row.push(cur.trim());cur='';}
+      else if((c==='\n'||c==='\r')&&!inQ){
         if(text[i+1]==='\n')i++;
         row.push(cur.trim());cur='';
         if(row.some(x=>x))rows.push(row);row=[];
@@ -594,10 +538,8 @@
     headers = rows[0].map(h=>h.replace(/^"|"$/g,''));
     allData = rows.slice(1).filter(r=>r.some(c=>c));
     document.getElementById('setup-banner').style.display = 'none';
-    const ic = detectCol(headers, imgKw);
-    const hint = ic>=0?' · copertine attive':'';
     document.getElementById('last-update').textContent =
-      `${allData.length} titoli${hint} · Aggiornato il ${new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'})}`;
+      `${allData.length} documenti · Aggiornato il ${new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'})}`;
     updateStats(); populateFilters(); render();
   }
 
