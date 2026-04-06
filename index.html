@@ -82,8 +82,12 @@
 
     /* ── TABLE DESKTOP ── */
     .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-    table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-    td, th { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    table { width: 100%; border-collapse: collapse; table-layout: auto; }
+    /* colonna immagine fissa, le altre si spartiscono lo spazio */
+    thead th:first-child, tbody td:first-child { width: 56px; flex-shrink: 0; }
+    thead th.col-name { width: 50%; }
+    thead th.col-code { width: 20%; }
+    thead th.col-qty  { width: 30%; }
     thead th { text-align: left; padding: 11px 16px; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-faint); background: var(--surface2); border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; white-space: nowrap; }
     thead th:hover { color: var(--text-muted); }
     thead th.sorted { color: var(--text); }
@@ -384,7 +388,8 @@
       const cls   = sortCol===i?'sorted':'';
       const arr   = sortCol===i?(sortAsc?'↑':'↓'):'↕';
       const label = i===COL_QTY?'Disponibilità':headers[i];
-      t += `<th class="${cls}" onclick="sortBy(${i})">${label} <span class="sort-arr">${arr}</span></th>`;
+      const colCls = i===COL_NAME?'col-name':i===COL_CODE?'col-code':i===COL_QTY?'col-qty':'';
+      t += `<th class="${cls} ${colCls}" onclick="sortBy(${i})">${label} <span class="sort-arr">${arr}</span></th>`;
     });
     t += `</tr></thead><tbody>`;
 
