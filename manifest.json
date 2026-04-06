@@ -1,0 +1,25 @@
+{
+  "name": "Inventario CAS Pordenone",
+  "short_name": "Inventario CAS",
+  "description": "Gestione inventario letteratura CAS Pordenone",
+  "start_url": "/Inventario/",
+  "scope": "/Inventario/",
+  "display": "standalone",
+  "background_color": "#1B5F8E",
+  "theme_color": "#1B5F8E",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/caspn/Inventario/main/Logo%20Elenco%20Medici.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/caspn/Inventario/main/Logo%20Elenco%20Medici.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
