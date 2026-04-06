@@ -37,7 +37,7 @@
       line-height: 1.6;
     }
 
-    /* ── HEADER ── */
+    /* HEADER */
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -53,13 +53,8 @@
       font-size: 28px;
       font-weight: 400;
       letter-spacing: -0.3px;
-      color: var(--text);
     }
-    .brand p {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 3px;
-    }
+    .brand p { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
     .reload-header {
       background: transparent;
       border: 1px solid var(--border-strong);
@@ -75,26 +70,16 @@
       gap: 6px;
     }
     .reload-header:hover { background: var(--surface2); color: var(--text); }
-    .spin { display: inline-block; animation: spin 1s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
+    .spin { display: inline-block; animation: spin 1s linear infinite; }
 
-    /* ── STATS ── */
-    .stats-bar {
-      display: flex;
-      gap: 1px;
-      background: var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .stat-item {
-      flex: 1;
-      background: var(--surface);
-      padding: 1rem 1.5rem;
-      min-width: 0;
-    }
+    /* STATS */
+    .stats-bar { display: flex; gap: 1px; background: var(--border); border-bottom: 1px solid var(--border); }
+    .stat-item { flex: 1; background: var(--surface); padding: 1rem 1.5rem; min-width: 0; }
     .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); font-weight: 500; }
     .stat-value { font-size: 26px; font-weight: 300; color: var(--text); margin-top: 2px; font-family: 'Playfair Display', serif; }
 
-    /* ── TOOLBAR ── */
+    /* TOOLBAR */
     .toolbar {
       padding: 1rem 2.5rem;
       display: flex;
@@ -107,211 +92,103 @@
       top: 0;
       z-index: 10;
     }
-    .search-wrap {
-      flex: 1;
-      min-width: 220px;
-      position: relative;
-    }
-    .search-wrap svg {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.4;
-      pointer-events: none;
-    }
+    .search-wrap { flex: 1; min-width: 220px; position: relative; }
+    .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); opacity: 0.4; pointer-events: none; }
     .search-wrap input {
-      width: 100%;
-      height: 38px;
-      padding: 0 12px 0 38px;
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 14px;
-      font-family: 'DM Sans', sans-serif;
-      outline: none;
-      transition: border-color 0.15s;
+      width: 100%; height: 38px; padding: 0 12px 0 38px;
+      border: 1px solid var(--border-strong); border-radius: var(--radius);
+      background: var(--surface); color: var(--text);
+      font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none;
     }
     .search-wrap input:focus { border-color: var(--accent); }
     .search-wrap input::placeholder { color: var(--text-faint); }
 
     select {
-      height: 38px;
-      padding: 0 32px 0 12px;
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 14px;
-      font-family: 'DM Sans', sans-serif;
-      cursor: pointer;
-      outline: none;
-      appearance: none;
+      height: 38px; padding: 0 32px 0 12px;
+      border: 1px solid var(--border-strong); border-radius: var(--radius);
+      background: var(--surface); color: var(--text);
+      font-size: 14px; font-family: 'DM Sans', sans-serif;
+      cursor: pointer; outline: none; appearance: none; min-width: 140px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      min-width: 140px;
+      background-repeat: no-repeat; background-position: right 10px center;
     }
     select:focus { border-color: var(--accent); }
 
-    .view-toggle {
-      display: flex;
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--surface);
-    }
+    .view-toggle { display: flex; border: 1px solid var(--border-strong); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
     .view-toggle button {
-      border: none;
-      background: transparent;
-      padding: 0 14px;
-      height: 38px;
-      cursor: pointer;
-      font-size: 13px;
-      font-family: 'DM Sans', sans-serif;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.15s;
+      border: none; background: transparent; padding: 0 14px; height: 38px;
+      cursor: pointer; font-size: 13px; font-family: 'DM Sans', sans-serif;
+      color: var(--text-muted); display: flex; align-items: center; gap: 6px; transition: all 0.15s;
     }
     .view-toggle button + button { border-left: 1px solid var(--border); }
     .view-toggle button.active { background: var(--surface2); color: var(--text); font-weight: 500; }
     .view-toggle button:hover:not(.active) { background: var(--surface2); }
+    .result-count { font-size: 13px; color: var(--text-faint); margin-left: auto; white-space: nowrap; }
 
-    .result-count {
-      font-size: 13px;
-      color: var(--text-faint);
-      margin-left: auto;
-      white-space: nowrap;
-    }
-
-    /* ── MAIN CONTENT ── */
+    /* MAIN */
     main { padding: 1.5rem 2.5rem 3rem; }
 
-    /* ── TABLE ── */
-    .table-wrap {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      overflow-x: auto;
-    }
+    /* TABLE */
+    .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; min-width: 500px; }
     thead th {
-      text-align: left;
-      padding: 11px 16px;
-      font-size: 11px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: var(--text-faint);
-      background: var(--surface2);
-      border-bottom: 1px solid var(--border);
-      cursor: pointer;
-      user-select: none;
-      white-space: nowrap;
+      text-align: left; padding: 11px 16px;
+      font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--text-faint); background: var(--surface2);
+      border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; white-space: nowrap;
     }
     thead th:hover { color: var(--text-muted); }
     thead th.sorted { color: var(--text); }
     tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
     tbody tr:last-child { border-bottom: none; }
     tbody tr:hover { background: #FAFAF8; }
-    tbody td { padding: 11px 16px; font-size: 14px; vertical-align: middle; }
-    .td-main { font-weight: 500; color: var(--text); }
+    tbody td { padding: 10px 16px; font-size: 14px; vertical-align: middle; }
+    .td-main { font-weight: 500; }
     .td-muted { color: var(--text-muted); }
 
-    /* ── BADGES ── */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 3px 9px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-    }
+    /* Thumbnail nella tabella */
+    .thumb { width: 36px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border); display: block; }
+    .thumb-placeholder { width: 36px; height: 50px; border-radius: 4px; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-faint); font-size: 18px; }
+
+    /* BADGES */
+    .badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 500; letter-spacing: 0.02em; }
     .badge-avail { background: var(--accent-light); color: var(--accent); }
-    .badge-low    { background: var(--amber-light);  color: var(--amber);  }
-    .badge-out    { background: var(--red-light);    color: var(--red);    }
+    .badge-low   { background: var(--amber-light);  color: var(--amber); }
+    .badge-out   { background: var(--red-light);    color: var(--red); }
 
-    /* ── CARDS ── */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-      gap: 14px;
-    }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.2rem 1.35rem;
-      transition: box-shadow 0.15s, transform 0.15s;
-    }
-    .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); transform: translateY(-1px); }
-    .card-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 400; line-height: 1.35; margin-bottom: 4px; }
-    .card-author { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
-    .card-attrs { font-size: 12px; color: var(--text-faint); margin-bottom: 10px; line-height: 1.8; }
-    .card-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--border); }
-    .card-qty { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 400; color: var(--text-muted); }
+    /* CARDS */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: box-shadow 0.15s, transform 0.15s; display: flex; flex-direction: column; }
+    .card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
 
-    /* ── STATES ── */
-    .empty-state, .loading-state {
-      text-align: center;
-      padding: 5rem 2rem;
-      color: var(--text-faint);
-    }
-    .empty-state svg, .loading-state svg { margin-bottom: 1rem; opacity: 0.3; }
-    .empty-state p, .loading-state p { font-size: 15px; }
+    .card-cover { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; }
+    .card-cover-placeholder { width: 100%; aspect-ratio: 2/3; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 48px; color: var(--text-faint); border-bottom: 1px solid var(--border); }
 
-    /* ── SETUP BANNER ── */
-    .setup-banner {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      display: none;
-    }
+    .card-body { padding: 1rem 1.1rem; flex: 1; display: flex; flex-direction: column; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 400; line-height: 1.35; margin-bottom: 3px; }
+    .card-author { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+    .card-attrs { font-size: 11px; color: var(--text-faint); line-height: 1.9; margin-bottom: 8px; flex: 1; }
+    .card-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--border); margin-top: auto; }
+    .card-qty { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--text-muted); }
+
+    /* STATES */
+    .empty-state, .loading-state { text-align: center; padding: 5rem 2rem; color: var(--text-faint); }
+    .empty-state p, .loading-state p { font-size: 15px; margin-top: 1rem; }
+
+    /* SETUP BANNER */
+    .setup-banner { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 1.5rem; display: none; }
     .setup-banner h3 { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
     .setup-banner p { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.7; }
-    .setup-banner ol { font-size: 14px; color: var(--text-muted); padding-left: 20px; margin-bottom: 1.25rem; line-height: 2; }
+    .setup-banner ol { font-size: 14px; color: var(--text-muted); padding-left: 20px; margin-bottom: 1.25rem; line-height: 2.2; }
+    .hint-box { background: var(--accent-light); border-radius: var(--radius); padding: 12px 16px; font-size: 13px; color: var(--accent); margin-bottom: 1.25rem; line-height: 1.6; }
     .custom-url-row { display: flex; gap: 8px; flex-wrap: wrap; }
-    .custom-url-row input {
-      flex: 1;
-      min-width: 200px;
-      height: 38px;
-      padding: 0 12px;
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius);
-      background: var(--bg);
-      color: var(--text);
-      font-size: 14px;
-      font-family: 'DM Sans', sans-serif;
-      outline: none;
-    }
-    .custom-url-row input:focus { border-color: var(--accent); }
-    .btn-primary {
-      height: 38px;
-      padding: 0 18px;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius);
-      font-size: 14px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      cursor: pointer;
-      transition: opacity 0.15s;
-    }
+    .custom-url-row input { flex: 1; min-width: 200px; height: 38px; padding: 0 12px; border: 1px solid var(--border-strong); border-radius: var(--radius); background: var(--bg); color: var(--text); font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; }
+    .btn-primary { height: 38px; padding: 0 18px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 500; cursor: pointer; transition: opacity 0.15s; }
     .btn-primary:hover { opacity: 0.88; }
 
-    /* ── SORT ARROW ── */
     .sort-arr { opacity: 0; margin-left: 4px; }
     th.sorted .sort-arr { opacity: 1; }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
       header { padding: 1.25rem 1.25rem 1rem; }
       .stats-bar { flex-wrap: wrap; }
@@ -319,6 +196,7 @@
       .toolbar { padding: 0.75rem 1.25rem; }
       main { padding: 1rem 1.25rem 2.5rem; }
       .brand h1 { font-size: 22px; }
+      .cards-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
     }
   </style>
 </head>
@@ -327,7 +205,7 @@
 <header>
   <div class="brand">
     <h1>Inventario Letteratura</h1>
-    <p id="last-update">Caricamento in corso...</p>
+    <p id="last-update">Caricamento in corso…</p>
   </div>
   <button class="reload-header" onclick="reload()">
     <span id="reload-icon">↻</span> Aggiorna
@@ -344,7 +222,7 @@
 <div class="toolbar">
   <div class="search-wrap">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#1A1814" stroke-width="1.5"/><path d="M10.5 10.5L14 14" stroke="#1A1814" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <input type="text" id="search" placeholder="Cerca per titolo, autore, genere…">
+    <input type="text" id="search" placeholder="Cerca titolo, autore, genere…">
   </div>
   <select id="filter-col"><option value="">Filtra per…</option></select>
   <select id="filter-val"><option value="">Tutti</option></select>
@@ -364,22 +242,25 @@
 <main>
   <div class="setup-banner" id="setup-banner">
     <h3>Configurazione accesso Google Sheets</h3>
-    <p>Per caricare i dati automaticamente, assicurati che il foglio sia condiviso pubblicamente:</p>
+    <p>Per caricare i dati automaticamente, il foglio deve essere condiviso pubblicamente:</p>
     <ol>
       <li>Apri il Google Sheets e clicca <strong>Condividi</strong></li>
-      <li>Cambia accesso in <strong>"Chiunque abbia il link"</strong> → Visualizzatore</li>
-      <li>Clicca <strong>Aggiorna</strong> in alto a destra</li>
+      <li>Imposta accesso: <strong>"Chiunque abbia il link"</strong> → Visualizzatore</li>
+      <li>Salva e clicca <strong>Aggiorna</strong> in alto a destra</li>
     </ol>
-    <p>Oppure incolla direttamente l'URL del file CSV esportato (File → Scarica → CSV):</p>
+    <div class="hint-box">
+      <strong>Per le copertine:</strong> aggiungi una colonna chiamata <strong>Copertina</strong> (o <em>Immagine / Cover / URL</em>) e incolla il link diretto all'immagine per ogni libro. L'app la mostrerà automaticamente sia nella vista Lista che in quella a Schede.
+    </div>
+    <p>Oppure carica direttamente un file CSV (File → Scarica → Valori separati da virgola):</p>
     <div class="custom-url-row">
-      <input type="text" id="custom-url" placeholder="URL CSV o ID del Google Sheet…">
+      <input type="text" id="custom-url" placeholder="URL CSV pubblico o ID del Google Sheet…">
       <button class="btn-primary" onclick="loadCustom()">Carica</button>
     </div>
   </div>
 
   <div id="content">
     <div class="loading-state">
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" stroke="#1A1814" stroke-width="2" stroke-dasharray="80" stroke-dashoffset="20"><animateTransform attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="1s" repeatCount="indefinite"/></circle></svg>
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" stroke="#2C4A3E" stroke-width="2" stroke-dasharray="80" stroke-dashoffset="20"><animateTransform attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="1s" repeatCount="indefinite"/></circle></svg>
       <p>Caricamento inventario…</p>
     </div>
   </div>
@@ -389,43 +270,11 @@
   const SHEET_ID = '1kH-ODNxH9DjUZJ__SoWmtW0_2VsPCQt5yXURjwSHRUE';
   let allData = [], headers = [], currentView = 'table', sortCol = -1, sortAsc = true;
 
-  async function fetchSheet() {
-    const urls = [
-      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`,
-      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`,
-    ];
-    for (const url of urls) {
-      try {
-        const r = await fetch(url);
-        if (r.ok) {
-          const t = await r.text();
-          if (t && t.length > 20) return t;
-        }
-      } catch(e) {}
-    }
-    return null;
-  }
+  const qtyKw  = ['quantit','qty','copie','disponib','stock','numero','pezzi'];
+  const imgKw  = ['copertina','immagine','cover','image','foto','img','photo'];
+  const authKw = ['autore','author','scrittore'];
 
-  function parseCSV(text) {
-    const rows = [];
-    let inQ = false, cur = '', row = [];
-    for (let i = 0; i < text.length; i++) {
-      const c = text[i];
-      if (c === '"') { inQ = !inQ; }
-      else if (c === ',' && !inQ) { row.push(cur.trim()); cur = ''; }
-      else if ((c === '\n' || c === '\r') && !inQ) {
-        if (text[i + 1] === '\n') i++;
-        row.push(cur.trim()); cur = '';
-        if (row.some(x => x)) rows.push(row);
-        row = [];
-      } else { cur += c; }
-    }
-    if (cur || row.length) { row.push(cur.trim()); if (row.some(x => x)) rows.push(row); }
-    return rows;
-  }
-
-  function detectQtyCol(hdrs) {
-    const kw = ['quantit', 'qty', 'copie', 'disponib', 'stock', 'q.ta', 'numero', 'pezzi'];
+  function detectCol(hdrs, kw) {
     return hdrs.findIndex(h => kw.some(k => h.toLowerCase().includes(k)));
   }
 
@@ -442,23 +291,30 @@
     return `<span class="badge badge-${s}">${L[s]}</span>`;
   }
 
+  function isUrl(str) {
+    try { const u = new URL(str); return u.protocol === 'http:' || u.protocol === 'https:'; }
+    catch { return false; }
+  }
+
   function updateStats() {
-    const qc = detectQtyCol(headers);
+    const qc = detectCol(headers, qtyKw);
     document.getElementById('s-total').textContent = allData.length;
     if (qc >= 0) {
       document.getElementById('s-avail').textContent = allData.filter(r => getStatus(r[qc]) === 'avail').length;
-      document.getElementById('s-low').textContent = allData.filter(r => getStatus(r[qc]) === 'low').length;
-      document.getElementById('s-out').textContent = allData.filter(r => getStatus(r[qc]) === 'out').length;
+      document.getElementById('s-low').textContent   = allData.filter(r => getStatus(r[qc]) === 'low').length;
+      document.getElementById('s-out').textContent   = allData.filter(r => getStatus(r[qc]) === 'out').length;
     } else {
       ['s-avail','s-low','s-out'].forEach(id => document.getElementById(id).textContent = '—');
     }
   }
 
   function populateFilters() {
+    const ic = detectCol(headers, imgKw);
     const fc = document.getElementById('filter-col');
     const fv = document.getElementById('filter-val');
     fc.innerHTML = '<option value="">Filtra per…</option>';
     headers.forEach((h, i) => {
+      if (i === ic) return;
       const o = document.createElement('option');
       o.value = i; o.textContent = h; fc.appendChild(o);
     });
@@ -475,33 +331,36 @@
   }
 
   function getFiltered() {
-    const q = document.getElementById('search').value.toLowerCase();
+    const q  = document.getElementById('search').value.toLowerCase();
     const fc = parseInt(document.getElementById('filter-col').value);
     const fv = document.getElementById('filter-val').value;
     let data = allData.filter(r => {
-      const mq = !q || r.some(c => c.toLowerCase().includes(q));
+      const mq = !q  || r.some(c => c.toLowerCase().includes(q));
       const mf = !fv || (!isNaN(fc) && r[fc] === fv);
       return mq && mf;
     });
     if (sortCol >= 0) {
       data.sort((a, b) => {
-        const av = a[sortCol] || '', bv = b[sortCol] || '';
+        const av = a[sortCol]||'', bv = b[sortCol]||'';
         const an = parseFloat(av), bn = parseFloat(bv);
-        if (!isNaN(an) && !isNaN(bn)) return sortAsc ? an - bn : bn - an;
-        return sortAsc ? av.localeCompare(bv, 'it') : bv.localeCompare(av, 'it');
+        if (!isNaN(an) && !isNaN(bn)) return sortAsc ? an-bn : bn-an;
+        return sortAsc ? av.localeCompare(bv,'it') : bv.localeCompare(av,'it');
       });
     }
     return data;
   }
 
   function renderTable(data) {
-    const qc = detectQtyCol(headers);
+    const qc = detectCol(headers, qtyKw);
+    const ic = detectCol(headers, imgKw);
     if (data.length === 0) {
-      document.getElementById('content').innerHTML = `<div class="empty-state"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#1A1814" stroke-width="1.5"/><path d="M13 20h14M20 13v14" stroke="#1A1814" stroke-width="1.5" stroke-linecap="round"/></svg><p>Nessun risultato trovato</p></div>`;
+      document.getElementById('content').innerHTML = `<div class="empty-state"><p>Nessun risultato trovato</p></div>`;
       return;
     }
     let h = `<div class="table-wrap"><table><thead><tr>`;
+    if (ic >= 0) h += `<th style="width:56px;cursor:default;"></th>`;
     headers.forEach((hd, i) => {
+      if (i === ic) return;
       const cls = sortCol === i ? 'sorted' : '';
       const arr = sortCol === i ? (sortAsc ? '↑' : '↓') : '↕';
       h += `<th class="${cls}" onclick="sortBy(${i})">${hd} <span class="sort-arr">${arr}</span></th>`;
@@ -509,7 +368,16 @@
     h += `</tr></thead><tbody>`;
     data.forEach(r => {
       h += '<tr>';
+      if (ic >= 0) {
+        const url = r[ic] || '';
+        if (url && isUrl(url)) {
+          h += `<td style="padding:6px 8px 6px 16px;"><img src="${url}" class="thumb" loading="lazy" onerror="this.outerHTML='<div class=\\'thumb-placeholder\\'>📖</div>'"></td>`;
+        } else {
+          h += `<td style="padding:6px 8px 6px 16px;"><div class="thumb-placeholder">📖</div></td>`;
+        }
+      }
       r.forEach((c, i) => {
+        if (i === ic) return;
         if (i === qc) {
           h += `<td>${badge(c)} <span style="color:var(--text-faint);font-size:12px;margin-left:4px;">${c}</span></td>`;
         } else if (i === 0) {
@@ -529,24 +397,34 @@
       document.getElementById('content').innerHTML = `<div class="empty-state"><p>Nessun risultato trovato</p></div>`;
       return;
     }
-    const qc = detectQtyCol(headers);
-    let aIdx = headers.findIndex(h => /autore|author/i.test(h));
-    if (aIdx < 0) aIdx = 1;
+    const qc = detectCol(headers, qtyKw);
+    const ic = detectCol(headers, imgKw);
+    const ac = detectCol(headers, authKw) >= 0 ? detectCol(headers, authKw) : (headers.length > 1 ? 1 : -1);
+
     let h = '<div class="cards-grid">';
     data.forEach(r => {
-      const qty = qc >= 0 ? r[qc] : '';
-      const author = aIdx >= 0 ? r[aIdx] : '';
-      const attrs = headers
+      const qty    = qc >= 0 ? r[qc] : '';
+      const imgUrl = ic >= 0 ? (r[ic] || '') : '';
+      const author = ac >= 0 ? r[ac] : '';
+      const attrs  = headers
         .map((hd, i) => ({ hd, i }))
-        .filter(({ i }) => i !== 0 && i !== aIdx && i !== qc && r[i])
+        .filter(({ i }) => i !== 0 && i !== ac && i !== qc && i !== ic && r[i])
         .map(({ hd, i }) => `<span style="display:block;">${hd}: ${r[i]}</span>`).join('');
+
+      const coverHtml = (imgUrl && isUrl(imgUrl))
+        ? `<img src="${imgUrl}" class="card-cover" alt="${(r[0]||'').replace(/"/g,'&quot;')}" loading="lazy" onerror="this.outerHTML='<div class=\\'card-cover-placeholder\\'>📖</div>'">`
+        : `<div class="card-cover-placeholder">📖</div>`;
+
       h += `<div class="card">
-        <div class="card-title">${r[0] || '—'}</div>
-        ${author ? `<div class="card-author">${author}</div>` : ''}
-        ${attrs ? `<div class="card-attrs">${attrs}</div>` : ''}
-        <div class="card-foot">
-          <span>${qc >= 0 ? badge(qty) : ''}</span>
-          ${qc >= 0 ? `<span class="card-qty">${qty !== '' ? qty : '—'}</span>` : ''}
+        ${coverHtml}
+        <div class="card-body">
+          <div class="card-title">${r[0] || '—'}</div>
+          ${author ? `<div class="card-author">${author}</div>` : ''}
+          ${attrs  ? `<div class="card-attrs">${attrs}</div>` : ''}
+          <div class="card-foot">
+            <span>${qc >= 0 ? badge(qty) : ''}</span>
+            ${qc >= 0 ? `<span class="card-qty">${qty !== '' ? qty : '—'}</span>` : ''}
+          </div>
         </div>
       </div>`;
     });
@@ -573,14 +451,34 @@
     render();
   }
 
+  function parseCSV(text) {
+    const rows = [];
+    let inQ = false, cur = '', row = [];
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (c === '"') { inQ = !inQ; }
+      else if (c === ',' && !inQ) { row.push(cur.trim()); cur = ''; }
+      else if ((c === '\n' || c === '\r') && !inQ) {
+        if (text[i+1] === '\n') i++;
+        row.push(cur.trim()); cur = '';
+        if (row.some(x => x)) rows.push(row);
+        row = [];
+      } else { cur += c; }
+    }
+    if (cur || row.length) { row.push(cur.trim()); if (row.some(x=>x)) rows.push(row); }
+    return rows;
+  }
+
   function processCSV(text) {
     const rows = parseCSV(text);
     if (rows.length < 2) { showSetup(); return; }
     headers = rows[0].map(h => h.replace(/^"|"$/g, ''));
     allData = rows.slice(1).filter(r => r.some(c => c));
     document.getElementById('setup-banner').style.display = 'none';
+    const ic = detectCol(headers, imgKw);
+    const hint = ic >= 0 ? ' · copertine attive' : '';
     document.getElementById('last-update').textContent =
-      `${allData.length} titoli · Aggiornato il ${new Date().toLocaleDateString('it-IT', { day:'2-digit', month:'long', year:'numeric' })}`;
+      `${allData.length} titoli${hint} · Aggiornato il ${new Date().toLocaleDateString('it-IT', { day:'2-digit', month:'long', year:'numeric' })}`;
     updateStats();
     populateFilters();
     render();
@@ -589,7 +487,21 @@
   function showSetup() {
     document.getElementById('setup-banner').style.display = 'block';
     document.getElementById('content').innerHTML = `<div class="empty-state"><p>In attesa dei dati dal Google Sheets…</p></div>`;
-    document.getElementById('last-update').textContent = 'Configura l\'accesso per visualizzare i dati';
+    document.getElementById('last-update').textContent = "Configura l'accesso per visualizzare i dati";
+  }
+
+  async function fetchSheet() {
+    const urls = [
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`,
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`,
+    ];
+    for (const url of urls) {
+      try {
+        const r = await fetch(url);
+        if (r.ok) { const t = await r.text(); if (t && t.length > 20) return t; }
+      } catch(e) {}
+    }
+    return null;
   }
 
   async function loadCustom() {
@@ -597,16 +509,16 @@
     if (!url) return;
     try {
       const r = await fetch(url);
-      if (r.ok) { processCSV(await r.text()); }
-      else { alert('Impossibile caricare il file. Verifica il link.'); }
-    } catch(e) { alert('Errore nel caricamento: ' + e.message); }
+      if (r.ok) processCSV(await r.text());
+      else alert('Impossibile caricare il file. Verifica il link.');
+    } catch(e) { alert('Errore: ' + e.message); }
   }
 
   async function reload() {
     const icon = document.getElementById('reload-icon');
-    icon.className = 'spin'; icon.textContent = '↻';
+    icon.className = 'spin';
     const csv = await fetchSheet();
-    icon.className = ''; icon.textContent = '↻';
+    icon.className = '';
     if (csv) processCSV(csv);
     else showSetup();
   }
