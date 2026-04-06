@@ -83,10 +83,17 @@
     .form-inner {
       width: 70%;
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: flex-end;
+      flex-direction: column;
+      gap: 10px;
     }
+    .form-row-full { width: 100%; }
+    .form-row-full .form-group { width: 100%; }
+    .form-row-full select { width: 100%; }
+    .form-row-actions { display: flex; gap: 10px; align-items: flex-end; width: 100%; }
+    .form-col-qty { flex: 0 0 140px; }
+    .form-col-btn { flex: 1; display: flex; flex-direction: column; }
+    .form-col-btn label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+    .form-col-btn button { width: 100%; height: 38px; }
     .form-group { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 200px; }
     .form-group label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: rgba(255,255,255,0.7); }
     .form-group select, .form-group input[type="number"] {
@@ -257,12 +264,13 @@
       header { padding: 1rem; }
       .header-inner { max-width: 100%; }
       .header-title { font-size: 17px; }
-      .form-section { padding: 0.75rem 1rem !important; justify-content: stretch !important; }
-      .form-inner { width: 100% !important; max-width: 100% !important; flex-direction: column !important; gap: 10px; }
-      .form-group { min-width: 0 !important; width: 100% !important; max-width: 100% !important; }
-      .form-group select, .form-group input[type="number"] { width: 100% !important; }
-      .form-actions { width: 100% !important; display: flex !important; gap: 8px; }
-      .btn-add, .btn-remove { flex: 1 !important; text-align: center; }
+      .form-section { padding: 0.75rem 1rem; }
+      .form-inner { width: 100%; }
+      .form-row-actions { display: flex; flex-wrap: nowrap; width: 100%; gap: 6px; }
+      .form-col-qty { flex: 0 0 30%; min-width: 0; }
+      .form-col-qty input { width: 100%; }
+      .form-col-btn { flex: 0 0 35%; min-width: 0; }
+      .form-col-btn button { font-size: 13px; padding: 0 4px; }
       .toolbar { padding: 0.75rem 1rem; }
       .legend { display: none; }
       main { padding: 1rem 1rem 2.5rem; }
@@ -270,7 +278,7 @@
       .table-container { max-width: 100%; }
       .mobile-list { display: flex; }
       .cards-grid { grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 10px; }
-    }
+    }}
     @media (max-width: 700px) {
       .table-container { max-width: 100%; }
     }
