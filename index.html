@@ -504,7 +504,8 @@
       t += `<tr class="${rc}">`;
       if (imgUrl&&isUrl(imgUrl)) t += `<td style="padding:6px 8px 6px 16px;"><img src="${imgUrl}" class="thumb" loading="lazy" onclick="openLightbox('${imgUrl.replace(/'/g,"\\'")}')"></td>`;
       else t += `<td style="padding:6px 8px 6px 16px;"><div class="thumb-placeholder">📄</div></td>`;
-      t += `<td class="td-main">${r[COL_NAME]||''}</td>`;
+      const {tipo: dTipo, titolo: dTitolo} = splitName(r[COL_NAME]||'');
+      t += `<td class="td-main">${dTipo ? `<span style="display:block;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-faint);line-height:1.2;">${dTipo}</span>` : ''}${dTitolo}</td>`;
       t += `<td class="td-muted">${r[COL_CODE]||''}</td>`;
       t += `<td>${badge(s)} <span style="color:var(--text-faint);font-size:12px;margin-left:4px;">${r[COL_QTY]||''}</span></td>`;
       t += `</tr>`;
