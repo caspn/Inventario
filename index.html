@@ -282,6 +282,28 @@
     @media (max-width: 700px) {
       .table-container { max-width: 100%; }
     }
+
+    .header-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff !important;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      border-radius: 10px;
+      padding: 8px 20px;
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      text-decoration: none !important;
+      white-space: nowrap;
+      background: transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.15s, border-color 0.15s;
+      line-height: 1;
+    }
+    .header-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.9); }
+    .header-btn:visited { color: #ffffff !important; text-decoration: none !important; }
   </style>
 </head>
 <body>
@@ -301,9 +323,7 @@
       <div class="header-title">Inventario CAS Pordenone</div>
       <div class="header-sub" id="last-update">Caricamento in corso…</div>
     </div>
-    <a href="registrazione.html" class="header-btn">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:6px;margin-top:-1px;"><path d="M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5"/><path d="M17.5 3.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 7.5-7.5z"/></svg>Registrazione
-    </a>
+    <a href="registrazione.html" class="header-btn">Registrazione</a>
   </div>
 </header>
 
