@@ -122,6 +122,7 @@
       letter-spacing: 0.07em;
       color: var(--text-muted);
     }
+    .field input[type="text"],
     .field select,
     .field input[type="number"],
     .field input[type="password"] {
@@ -270,6 +271,12 @@
       <div class="card-sub">Seleziona il documento e registra l'entrata o l'uscita di copie</div>
 
       <div class="field">
+        <label>Nome operatore <span style="color:var(--red);">*</span></label>
+        <input type="text" id="nome-input" placeholder="Es. Mario Rossi" autocomplete="name">
+        <div class="error-msg" id="nome-error" style="margin-top:6px;">Il nome è obbligatorio.</div>
+      </div>
+
+      <div class="field">
         <label>Documento</label>
         <select id="doc-select">
           <option value="">— seleziona —</option>
@@ -415,27 +422,44 @@
 
   // ── Update ──
   async function updateQty(action) {
+    const nome  = document.getElementById('nome-input').value.trim();
     const sel   = document.getElementById('doc-select');
     const idx   = parseInt(sel.value);
     const delta = parseInt(document.getElementById('qty-input').value) || 1;
+
+    if (!nome) {
+      document.getElementById('nome-error').classList.add('show');
+      document.getElementById('nome-input').focus();
+      return;
+    }
+    document.getElementById('nome-error').classList.remove('show');
+
     if (isNaN(idx)) return;
 
-    const row       = allData[idx];
-    const sheetRow  = idx + 2;
+    const row        = allData[idx];
+    const sheetRow   = idx + 2;
     const currentQty = parseInt(row[COL_QTY]) || 0;
-    const newQty    = action === 'add' ? currentQty + delta : Math.max(0, currentQty - delta);
+    const newQty     = action === 'add' ? currentQty + delta : Math.max(0, currentQty - delta);
+    const { tipo, titolo } = splitName(row[COL_NAME] || '');
+    const docLabel   = tipo ? `${tipo} — ${titolo}` : titolo;
+    const timestamp  = new Date().toLocaleString('it-IT');
 
     document.getElementById('btn-add').disabled    = true;
     document.getElementById('btn-remove').disabled = true;
 
     try {
-      const url = `${SCRIPT_URL}?row=${sheetRow}&col=${COL_QTY + 1}&value=${newQty}`;
-      await fetch(url, { method: 'GET', mode: 'no-cors' });
+      // 1. Aggiorna quantità nel foglio principale
+      const urlQty = `${SCRIPT_URL}?row=${sheetRow}&col=${COL_QTY + 1}&value=${newQty}`;
+      await fetch(urlQty, { method: 'GET', mode: 'no-cors' });
+
+      // 2. Aggiunge riga allo storico
+      const urlLog = `${SCRIPT_URL}?action=log&timestamp=${encodeURIComponent(timestamp)}&operatore=${encodeURIComponent(nome)}&documento=${encodeURIComponent(docLabel)}&tipo=${encodeURIComponent(action === 'add' ? 'Aggiunta' : 'Rimozione')}&quantita=${delta}&qtaPrecedente=${currentQty}&qtaNuova=${newQty}`;
+      await fetch(urlLog, { method: 'GET', mode: 'no-cors' });
+
       row[COL_QTY] = String(newQty);
       document.getElementById('qty-current').textContent = newQty;
       document.getElementById('qty-input').value = '';
-      const { tipo, titolo } = splitName(row[COL_NAME] || '');
-      showToast(`${tipo ? tipo + ' — ' : ''}${titolo}: ora ${newQty} cop.`, 'success');
+      showToast(`${docLabel}: ora ${newQty} cop.`, 'success');
     } catch(e) {
       showToast('Errore di rete: ' + e.message, 'error');
     } finally {
