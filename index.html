@@ -293,7 +293,6 @@
 </div>
 
 <!-- TOAST -->
-<div class="toast" id="toast"></div>
 
 <header>
   <div class="header-inner">
@@ -357,15 +356,13 @@
 
 <script>
   const SHEET_ID   = '1kH-ODNxH9DjUZJ__SoWmtW0_2VsPCQt5yXURjwSHRUE';
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyGKtGW95mhFTidIiU0PGxpsIv2m3qntPrLgf4iiaoC663gboTuTeJu6OrmlekWnM4s/exec';
-
   const COL_IMG  = 0; // A
   const COL_NAME = 1; // B
   const COL_CODE = 2; // C
   const COL_QTY  = 3; // D
   const COL_MIN  = 4; // E (nascosta, solo per calcoli)
 
-  let allData = [], headers = [], rowIndex = {}, currentView = 'table', sortCol = -1, sortAsc = true;
+  let allData = [], headers = [], currentView = 'table', sortCol = -1, sortAsc = true;
 
   // ── Logo inline ──
   document.getElementById('header-logo').src = 'https://raw.githubusercontent.com/caspn/Inventario/main/Logo%20Elenco%20Medici.png';
@@ -384,15 +381,7 @@
   function isUrl(s) { try { const u=new URL(s); return u.protocol==='http:'||u.protocol==='https:'; } catch { return false; } }
   function splitName(v) { const d=v.indexOf(' - '); return d<0 ? {tipo:'',titolo:v.trim()} : {tipo:v.slice(0,d).trim().toUpperCase(), titolo:v.slice(d+3).trim()}; }
 
-  // ── Toast ──
-  function showToast(msg, type='success') {
-    const t = document.getElementById('toast');
-    t.textContent = msg; t.className = `toast ${type} show`;
-    setTimeout(() => t.className = 'toast', 3000);
-  }
 
-
-  // ── Aggiornamento quantità via Apps Script ──
 
   // ── Lightbox ──
   function openLightbox(url) { document.getElementById('lightbox-img').src=url; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
