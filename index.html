@@ -302,7 +302,9 @@
       <div class="header-title">Inventario CAS Pordenone</div>
       <div class="header-sub" id="last-update">Caricamento in corso…</div>
     </div>
-    <a href="registrazione.html" class="header-btn">Registrazione</a>
+    <a href="registrazione.html" class="header-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:6px;margin-top:-1px;"><path d="M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5"/><path d="M17.5 3.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 7.5-7.5z"/></svg>Registrazione
+    </a>
   </div>
 </header>
 
@@ -389,58 +391,8 @@
     setTimeout(() => t.className = 'toast', 3000);
   }
 
-  // ── Dropdown documenti ──
-  function populateDocSelect() {
-    const sel = document.getElementById('doc-select');
-    sel.innerHTML = '<option value="">— seleziona —</option>';
-    allData.forEach((r, i) => {
-      const o = document.createElement('option');
-      o.value = i;
-      o.textContent = r[COL_NAME] || `Riga ${i+2}`;
-      sel.appendChild(o);
-    });
-    sel.onchange = () => {
-      const hasDoc = sel.value !== '';
-      document.getElementById('btn-add').disabled    = !hasDoc;
-      document.getElementById('btn-remove').disabled = !hasDoc;
-    };
-  }
 
   // ── Aggiornamento quantità via Apps Script ──
-  async function updateQty(action) {
-    const sel = document.getElementById('doc-select');
-    const qtyInput = document.getElementById('qty-input');
-    const idx = parseInt(sel.value);
-    const delta = parseInt(qtyInput.value) || 1;
-    if (isNaN(idx)) return;
-
-    const row = allData[idx];
-    const sheetRow = idx + 2; // +1 intestazione, +1 base 1
-    const currentQty = parseInt(row[COL_QTY]) || 0;
-    const newQty = action === 'add' ? currentQty + delta : Math.max(0, currentQty - delta);
-
-    if (!SCRIPT_URL) {
-      showToast('Script URL non configurato. Vedi le istruzioni di setup.', 'error');
-      return;
-    }
-
-    document.getElementById('btn-add').disabled = true;
-    document.getElementById('btn-remove').disabled = true;
-
-    try {
-      const url = `${SCRIPT_URL}?row=${sheetRow}&col=${COL_QTY + 1}&value=${newQty}`;
-      await fetch(url, { method: 'GET', mode: 'no-cors' });
-      row[COL_QTY] = String(newQty);
-      showToast(`Aggiornato: ${row[COL_NAME]} → ${newQty} copie`, 'success');
-      render();
-    } catch(e) {
-      showToast('Errore di rete: ' + e.message, 'error');
-    } finally {
-      const hasDoc = sel.value !== '';
-      document.getElementById('btn-add').disabled    = !hasDoc;
-      document.getElementById('btn-remove').disabled = !hasDoc;
-    }
-  }
 
   // ── Lightbox ──
   function openLightbox(url) { document.getElementById('lightbox-img').src=url; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
@@ -565,7 +517,6 @@
     document.getElementById('setup-banner').style.display='none';
     document.getElementById('last-update').textContent=
       `${allData.length} documenti · Aggiornato il ${new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'})}`;
-    populateDocSelect();
     render();
   }
 
