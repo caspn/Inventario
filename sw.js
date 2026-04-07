@@ -1,17 +1,11 @@
-const CACHE = 'cas-inventario-v3';
-const ASSETS = [
-  '/Inventario/',
-  '/Inventario/index.html',
-  '/Inventario/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap'
-];
+const CACHE = 'cas-inventario-v4';
 
+// All'installazione non pre-carichiamo nulla
 self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())
-  );
+  self.skipWaiting();
 });
 
+// All'attivazione puliamo le cache vecchie
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
@@ -21,17 +15,38 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  // Per le richieste al Google Sheet, vai sempre in rete
-  if (e.request.url.includes('google') || e.request.url.includes('script.google')) {
+  const url = new URL(e.request.url);
+
+  // Richieste a Google (sheets, script) → sempre rete, mai cache
+  if (url.hostname.includes('google') || url.hostname.includes('googleapis')) {
     return;
   }
+
+  // File HTML → network-first: prova sempre la rete, cache solo se offline
+  if (e.request.destination === 'document' || url.pathname.endsWith('.html')) {
+    e.respondWith(
+      fetch(e.request)
+        .then(res => {
+          const clone = res.clone();
+          caches.open(CACHE).then(c => c.put(e.request, clone));
+          return res;
+        })
+        .catch(() => caches.match(e.request))
+    );
+    return;
+  }
+
+  // Font, immagini, JS, CSS → cache-first (cambiano raramente)
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request).then(res => {
-      if (res && res.status === 200 && res.type !== 'opaque') {
-        const clone = res.clone();
-        caches.open(CACHE).then(c => c.put(e.request, clone));
-      }
-      return res;
-    }))
+    caches.match(e.request).then(cached => {
+      if (cached) return cached;
+      return fetch(e.request).then(res => {
+        if (res && res.status === 200) {
+          const clone = res.clone();
+          caches.open(CACHE).then(c => c.put(e.request, clone));
+        }
+        return res;
+      });
+    })
   );
 });
