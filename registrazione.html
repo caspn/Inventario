@@ -448,13 +448,17 @@
     document.getElementById('btn-remove').disabled = true;
 
     try {
-      // 1. Aggiorna quantità nel foglio principale
-      const urlQty = `${SCRIPT_URL}?row=${sheetRow}&col=${COL_QTY + 1}&value=${newQty}`;
-      await fetch(urlQty, { method: 'GET', mode: 'no-cors' });
-
-      // 2. Aggiunge riga allo storico
-      const urlLog = `${SCRIPT_URL}?action=log&timestamp=${encodeURIComponent(timestamp)}&operatore=${encodeURIComponent(nome)}&documento=${encodeURIComponent(docLabel)}&tipo=${encodeURIComponent(action === 'add' ? 'Aggiunta' : 'Rimozione')}&quantita=${delta}&qtaPrecedente=${currentQty}&qtaNuova=${newQty}`;
-      await fetch(urlLog, { method: 'GET', mode: 'no-cors' });
+      // Singola chiamata che aggiorna quantità E scrive lo storico
+      const urlAll = `${SCRIPT_URL}?action=update` +
+        `&row=${sheetRow}&col=${COL_QTY + 1}&value=${newQty}` +
+        `&timestamp=${encodeURIComponent(timestamp)}` +
+        `&operatore=${encodeURIComponent(nome)}` +
+        `&documento=${encodeURIComponent(docLabel)}` +
+        `&tipo=${encodeURIComponent(action === 'add' ? 'Aggiunta' : 'Rimozione')}` +
+        `&quantita=${delta}` +
+        `&qtaPrecedente=${currentQty}` +
+        `&qtaNuova=${newQty}`;
+      await fetch(urlAll, { method: 'GET', mode: 'no-cors' });
 
       row[COL_QTY] = String(newQty);
       document.getElementById('qty-current').textContent = newQty;
