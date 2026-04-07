@@ -298,42 +298,16 @@
 <header>
   <div class="header-inner">
     <img class="header-logo" id="header-logo" src="" alt="CAS Pordenone">
-    <div>
+    <div style="flex:1;">
       <div class="header-title">Inventario CAS Pordenone</div>
       <div class="header-sub" id="last-update">Caricamento in corso…</div>
     </div>
+    <a href="registrazione.html" class="header-btn">Registrazione</a>
   </div>
 </header>
 
 <!-- FORM AGGIORNAMENTO -->
-<div class="form-section">
-  <div class="form-inner">
-    <!-- Riga 1: dropdown documento (piena larghezza) -->
-    <div class="form-row-full">
-      <div class="form-group">
-        <label>Documento</label>
-        <select id="doc-select">
-          <option value="">— seleziona —</option>
-        </select>
-      </div>
-    </div>
-    <!-- Riga 2: quantità + pulsanti -->
-    <div class="form-row-actions">
-      <div class="form-group form-col-qty">
-        <label>Quantità</label>
-        <input type="number" id="qty-input" min="1" placeholder="es. 5">
-      </div>
-      <div class="form-col-btn">
-        <label>&nbsp;</label>
-        <button class="btn-add" id="btn-add" onclick="updateQty('add')" disabled>+ Aggiungi</button>
-      </div>
-      <div class="form-col-btn">
-        <label>&nbsp;</label>
-        <button class="btn-remove" id="btn-remove" onclick="updateQty('remove')" disabled>− Rimuovi</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <div class="toolbar">
   <div class="view-toggle">

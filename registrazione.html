@@ -1,0 +1,459 @@
+<!DOCTYPE html><!-- v1 -->
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Registrazione — CAS Pordenone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#1B5F8E">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cas-blue: #1B5F8E;
+      --cas-blue-dark: #144A70;
+      --bg: #F7F5F0;
+      --surface: #FFFFFF;
+      --surface2: #F0EDE7;
+      --border: rgba(0,0,0,0.1);
+      --border-strong: rgba(0,0,0,0.18);
+      --text: #1A1814;
+      --text-muted: #6B6560;
+      --text-faint: #A09A93;
+      --accent: #2C4A3E;
+      --accent-light: #E8EFE8;
+      --red: #8C2A2A;
+      --red-light: #FAECEC;
+      --radius: 10px;
+      --radius-lg: 16px;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--cas-blue);
+      padding: 1rem 2.5rem;
+      display: flex;
+      align-items: center;
+    }
+    .header-inner {
+      max-width: 70%;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .header-logo {
+      width: 44px; height: 44px;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 4px;
+      padding: 5px;
+      flex-shrink: 0;
+    }
+    .header-title {
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      flex: 1;
+    }
+    .header-btn {
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      border-radius: var(--radius);
+      padding: 7px 18px;
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.15s;
+      flex-shrink: 0;
+    }
+    .header-btn:hover { background: rgba(255,255,255,0.15); }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2.5rem 1rem 3rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 2rem;
+      width: 100%;
+      max-width: 480px;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .card-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+    }
+
+    /* ── FORM ELEMENTS ── */
+    .field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 1rem; }
+    .field label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+    }
+    .field select,
+    .field input[type="number"],
+    .field input[type="password"] {
+      height: 44px;
+      padding: 0 14px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 16px;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      appearance: none;
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+    }
+    .field select:focus,
+    .field input:focus { border-color: var(--cas-blue); }
+
+    /* ── ROW QTY + BTNS ── */
+    .row-actions {
+      display: grid;
+      grid-template-columns: 3fr 3.5fr 3.5fr;
+      gap: 8px;
+      margin-top: 0.25rem;
+    }
+    .row-actions .field { margin-bottom: 0; }
+    .btn-primary, .btn-secondary {
+      height: 44px;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      width: 100%;
+      align-self: flex-end;
+    }
+    .btn-primary  { background: var(--cas-blue); color: #fff; }
+    .btn-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border-strong); }
+    .btn-primary:hover, .btn-secondary:hover { opacity: 0.88; }
+    .btn-primary:active, .btn-secondary:active { transform: scale(0.97); }
+    .btn-primary:disabled, .btn-secondary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+    /* ── LOGIN SCREEN ── */
+    #login-screen, #form-screen { display: none; }
+    #login-screen.active, #form-screen.active { display: block; }
+
+    .login-icon {
+      width: 56px; height: 56px;
+      background: var(--cas-blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem;
+    }
+    .login-icon svg { width: 26px; height: 26px; }
+
+    .error-msg {
+      background: var(--red-light);
+      color: var(--red);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      font-size: 13px;
+      margin-top: 0.75rem;
+      display: none;
+    }
+    .error-msg.show { display: block; }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(8px);
+      background: var(--text); color: #fff;
+      padding: 10px 20px; border-radius: var(--radius);
+      font-size: 14px; z-index: 999;
+      opacity: 0; transition: opacity 0.25s, transform 0.25s;
+      pointer-events: none; white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast.success { background: #2C4A3E; }
+    .toast.error   { background: var(--red); }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+    /* ── CURRENT QTY DISPLAY ── */
+    .qty-info {
+      background: var(--surface2);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .qty-info.show { display: block; }
+    .qty-info strong { color: var(--text); }
+
+    @media (max-width: 600px) {
+      header { padding: 1rem; }
+      .header-inner { max-width: 100%; }
+      .header-title { font-size: 17px; }
+      .card { padding: 1.5rem 1.25rem; border-radius: var(--radius-lg); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img class="header-logo" id="header-logo" src="https://raw.githubusercontent.com/caspn/Inventario/main/Logo%20Elenco%20Medici.png" alt="CAS Pordenone">
+    <div class="header-title" style="flex:1;">Inventario CAS Pordenone</div>
+    <a href="index.html" class="header-btn">← Inventario</a>
+  </div>
+</header>
+
+<main>
+  <div class="card">
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="active">
+      <div class="login-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <div class="card-title" style="text-align:center;">Area riservata</div>
+      <div class="card-sub" style="text-align:center;">Inserisci la password per accedere alla registrazione</div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="pwd-input" placeholder="••••••••" onkeydown="if(event.key==='Enter') checkPwd()">
+      </div>
+      <button class="btn-primary" onclick="checkPwd()" style="width:100%;margin-top:0.5rem;">Accedi</button>
+      <div class="error-msg" id="pwd-error">Password errata. Riprova.</div>
+    </div>
+
+    <!-- FORM SCREEN -->
+    <div id="form-screen">
+      <div class="card-title">Registrazione movimenti</div>
+      <div class="card-sub">Seleziona il documento e registra l'entrata o l'uscita di copie</div>
+
+      <div class="field">
+        <label>Documento</label>
+        <select id="doc-select">
+          <option value="">— seleziona —</option>
+        </select>
+      </div>
+
+      <div class="qty-info" id="qty-info">
+        Disponibilità attuale: <strong id="qty-current">—</strong> cop.
+      </div>
+
+      <div class="row-actions">
+        <div class="field">
+          <label>Quantità</label>
+          <input type="number" id="qty-input" min="1" placeholder="es. 5">
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:flex-end;">
+          <button class="btn-primary" id="btn-add" onclick="updateQty('add')" disabled>+ Aggiungi</button>
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:flex-end;">
+          <button class="btn-secondary" id="btn-remove" onclick="updateQty('remove')" disabled>− Rimuovi</button>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div style="display:flex;justify-content:flex-end;">
+        <button class="btn-secondary" onclick="logout()" style="width:auto;padding:0 20px;font-size:13px;height:36px;">Esci</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const SHEET_ID   = '1kH-ODNxH9DjUZJ__SoWmtW0_2VsPCQt5yXURjwSHRUE';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyGKtGW95mhFTidIiU0PGxpsIv2m3qntPrLgf4iiaoC663gboTuTeJu6OrmlekWnM4s/exec';
+  // Password verificata tramite hash SHA-256 — non reversibile
+  const PWD_HASH = '37d3221dbb6882b7467496a52dbeadd67d0294ea9733bed21bbabdb8f645f40f';
+
+  const COL_NAME = 1;
+  const COL_QTY  = 3;
+  const COL_MIN  = 4;
+
+  let allData = [], headers = [];
+
+  // ── Auth ──
+  async function checkPwd() {
+    const val = document.getElementById('pwd-input').value;
+    const encoded = new TextEncoder().encode(val);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', encoded);
+    const hashHex = Array.from(new Uint8Array(hashBuffer))
+      .map(b => b.toString(16).padStart(2, '0')).join('');
+    if (hashHex === PWD_HASH) {
+      sessionStorage.setItem('cas_auth', '1');
+      showForm();
+    } else {
+      document.getElementById('pwd-error').classList.add('show');
+      document.getElementById('pwd-input').value = '';
+      document.getElementById('pwd-input').focus();
+    }
+  }
+
+  function logout() {
+    sessionStorage.removeItem('cas_auth');
+    document.getElementById('form-screen').classList.remove('active');
+    document.getElementById('login-screen').classList.add('active');
+    document.getElementById('pwd-input').value = '';
+  }
+
+  function showForm() {
+    document.getElementById('login-screen').classList.remove('active');
+    document.getElementById('form-screen').classList.add('active');
+    if (allData.length === 0) loadData();
+  }
+
+  // ── Data ──
+  function parseCSV(text) {
+    const rows = []; let inQ = false, cur = '', row = [];
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (c === '"') { inQ = !inQ; }
+      else if (c === ',' && !inQ) { row.push(cur.trim()); cur = ''; }
+      else if ((c === '\n' || c === '\r') && !inQ) {
+        if (text[i+1] === '\n') i++;
+        row.push(cur.trim()); cur = '';
+        if (row.some(x => x)) rows.push(row); row = [];
+      } else { cur += c; }
+    }
+    if (cur || row.length) { row.push(cur.trim()); if (row.some(x => x)) rows.push(row); }
+    return rows;
+  }
+
+  function splitName(v) {
+    const d = v.indexOf(' - ');
+    return d < 0 ? { tipo: '', titolo: v.trim() } : { tipo: v.slice(0, d).trim().toUpperCase(), titolo: v.slice(d + 3).trim() };
+  }
+
+  async function loadData() {
+    try {
+      const urls = [
+        `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`,
+        `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`,
+      ];
+      let text = null;
+      for (const url of urls) {
+        try { const r = await fetch(url); if (r.ok) { text = await r.text(); if (text && text.length > 20) break; } } catch(e) {}
+      }
+      if (!text) return;
+      const rows = parseCSV(text);
+      if (rows.length < 2) return;
+      headers = rows[0].map(h => h.replace(/^"|"$/g, ''));
+      allData = rows.slice(1).filter(r => r.some(c => c));
+      populateSelect();
+    } catch(e) { console.error(e); }
+  }
+
+  function populateSelect() {
+    const sel = document.getElementById('doc-select');
+    sel.innerHTML = '<option value="">— seleziona —</option>';
+    allData.forEach((r, i) => {
+      const { tipo, titolo } = splitName(r[COL_NAME] || '');
+      const label = tipo ? `${tipo} — ${titolo}` : titolo;
+      const o = document.createElement('option');
+      o.value = i; o.textContent = label;
+      sel.appendChild(o);
+    });
+    sel.onchange = () => {
+      const idx = parseInt(sel.value);
+      const has = !isNaN(idx);
+      document.getElementById('btn-add').disabled    = !has;
+      document.getElementById('btn-remove').disabled = !has;
+      if (has) {
+        const qty = allData[idx][COL_QTY] || '0';
+        document.getElementById('qty-current').textContent = qty;
+        document.getElementById('qty-info').classList.add('show');
+      } else {
+        document.getElementById('qty-info').classList.remove('show');
+      }
+    };
+  }
+
+  // ── Update ──
+  async function updateQty(action) {
+    const sel   = document.getElementById('doc-select');
+    const idx   = parseInt(sel.value);
+    const delta = parseInt(document.getElementById('qty-input').value) || 1;
+    if (isNaN(idx)) return;
+
+    const row       = allData[idx];
+    const sheetRow  = idx + 2;
+    const currentQty = parseInt(row[COL_QTY]) || 0;
+    const newQty    = action === 'add' ? currentQty + delta : Math.max(0, currentQty - delta);
+
+    document.getElementById('btn-add').disabled    = true;
+    document.getElementById('btn-remove').disabled = true;
+
+    try {
+      const url = `${SCRIPT_URL}?row=${sheetRow}&col=${COL_QTY + 1}&value=${newQty}`;
+      await fetch(url, { method: 'GET', mode: 'no-cors' });
+      row[COL_QTY] = String(newQty);
+      document.getElementById('qty-current').textContent = newQty;
+      document.getElementById('qty-input').value = '';
+      const { tipo, titolo } = splitName(row[COL_NAME] || '');
+      showToast(`${tipo ? tipo + ' — ' : ''}${titolo}: ora ${newQty} cop.`, 'success');
+    } catch(e) {
+      showToast('Errore di rete: ' + e.message, 'error');
+    } finally {
+      document.getElementById('btn-add').disabled    = false;
+      document.getElementById('btn-remove').disabled = false;
+    }
+  }
+
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.className = `toast ${type} show`;
+    setTimeout(() => t.className = 'toast', 3500);
+  }
+
+  // ── Init ──
+  if (sessionStorage.getItem('cas_auth') === '1') {
+    showForm();
+  }
+</script>
+</body>
+</html>
