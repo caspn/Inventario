@@ -1,6 +1,6 @@
 {
-  "name": "Inventario CAS Pordenone",
-  "short_name": "Inventario CAS",
+  "name": "Archivio CAS Pordenone",
+  "short_name": "Archivio CAS",
   "description": "Gestione inventario letteratura CAS Pordenone",
   "start_url": "/Inventario/",
   "scope": "/Inventario/",
